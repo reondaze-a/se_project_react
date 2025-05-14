@@ -1,5 +1,16 @@
-class Api {
-    constructor() {
-        this.baseUrl = 'https://api.example.com'; // Replace with your API base URL
+export default class weatherApi {
+    constructor(url) {
+        this.baseUrl = url; 
+    }
+
+     _checkResponse(res) {
+        if (res.ok) {
+            return res.json();
+        }
+        return Promise.reject(`Error: ${res.status}`);
+    }
+
+    fetchWeatherData() {
+        return fetch(`${this.baseUrl}`).then(this._checkResponse)
     }
 }

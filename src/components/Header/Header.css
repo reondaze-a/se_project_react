@@ -1,7 +1,7 @@
 .header {
     display: flex;
     justify-content: space-between;
-    padding: 32px 40px 28px;
+    padding: 32px 0 28px;
 }
 
 .header__info {
@@ -14,5 +14,52 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    gap: 10px
+    gap: 10px;
+    font-family: 'Cabinet Grotesk', sans-serif;
+}
+
+.header__profile-name {
+    font-family: 'Cabinet Grotesk', sans-serif;
+    font-size: 20px;
+    line-height: 1;
+    font-weight: bold;
+    color: #000000;
+}
+
+.header__profile-avatar {
+    border-radius: 50%;
+
+}
+
+.header__date {
+    font-family: 'Cabinet Grotesk', sans-serif;
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: bold;
+    color: #000000;
+    margin: 0;
+}
+
+.header__add-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 16px;
+    gap: 8px;
+    background-color: #fff;
+    border-radius: 12px;
+    border: none;
+    font-family: 'Cabinet Grotesk', sans-serif;
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: bold;
+    color: #000000;
+    cursor: pointer;
+}
+
+.header__add-button:hover {
+    background-color: #f0f0f0;
+    transition: background-color 0.4s ease;
+    transition: transform 0.2s ease-in-out;
+    transform: scale(1.02);
 }
