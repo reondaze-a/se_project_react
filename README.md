@@ -39,6 +39,8 @@ By combining weather data and user-interaction features, WTWR serves as both a p
 
 ## Links
 
+Click here to open the website: [WTWR](https://reondaze-a.github.io/se_project_react/)
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
