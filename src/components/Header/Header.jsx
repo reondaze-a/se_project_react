@@ -6,7 +6,8 @@ import weatherApi from '../../utils/Api'
 
 const currentDate = new Date().toLocaleString('default', { month: 'long', day: 'numeric' });
 
-export default function Header() {
+export default function Header({ openModal }) {
+
   return (
     <header className="header">
       <div className="header__info">
@@ -14,11 +15,13 @@ export default function Header() {
         <p className="header__date">{currentDate}, Columbus</p>
       </div>
       <div className="header__profile">
-        <button className="header__add-button">
+        <button type="button" className="header__add-button" onClick={openModal}>
           + Add clothes
         </button>
         <div className="header__profile-name">Abraham Efraim</div>
-        <img src={avatar} alt="profile picture" className="header__profile-avatar" />
+        <div className="header__profile-avatar-container">
+          <img src={avatar} alt="profile picture" className="header__profile-avatar" />
+        </div>
       </div>
     </header>
   )

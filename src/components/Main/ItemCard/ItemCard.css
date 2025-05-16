@@ -1,0 +1,37 @@
+.item-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #fff;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    border-radius: 19px;
+    overflow: hidden;
+    border: 1px solid #0000004D;
+    cursor: pointer;
+}
+
+.item-card:hover {
+    transform: scale(1.02);
+}
+
+.item-card__header {
+    position: absolute;
+    margin: 0;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    font-family: 'Cabinet Grotesk', sans-serif;
+    font-size: 16px;
+    line-height: 1.25;
+    font-weight: normal;
+    padding: 2px 12px;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.item-card__image {
+    border-radius: 19px;
+}
