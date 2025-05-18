@@ -5,7 +5,7 @@ const lat = locations.Columbus.latitude;
 const long = locations.Columbus.longitude;
 
 export const WeatherContext = createContext();
-const api = new weatherApi(
+const api = weatherApi(
   `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=${apiKey}`
 );
 

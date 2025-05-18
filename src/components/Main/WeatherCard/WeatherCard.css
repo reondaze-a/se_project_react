@@ -11,7 +11,9 @@
 }
 
 .weather-card__temperature {
-    font-size: 24px;
+    font-family: "Cabinet Grotesk", sans-serif;
+    font-size: 36px;
+    line-height: 1.1;
     font-weight: 700;
     color: #fff;
     margin: 0;

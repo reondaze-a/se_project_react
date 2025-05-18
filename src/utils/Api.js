@@ -1,16 +1,15 @@
-export default class weatherApi {
-    constructor(url) {
-        this.baseUrl = url; 
-    }
+export default function weatherApi(url) {
 
-     _checkResponse(res) {
+    function checkResponse(res) {
         if (res.ok) {
             return res.json();
         }
         return Promise.reject(`Error: ${res.status}`);
     }
 
-    fetchWeatherData() {
-        return fetch(`${this.baseUrl}`).then(this._checkResponse)
+    function fetchWeatherData() {
+        return fetch(`${url}`).then(checkResponse)
     }
+
+    return {fetchWeatherData}
 }

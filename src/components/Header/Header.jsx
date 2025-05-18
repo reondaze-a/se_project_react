@@ -1,5 +1,5 @@
 import headerLogo from "../../assets/Logo.svg"
-import avatar from "../../assets/Avatar.png"
+import avatar from "../../assets/avatarpicture.avif"
 import "./Header.css"
 import { useState, useEffect } from 'react'
 import weatherApi from '../../utils/Api'
