@@ -58,7 +58,7 @@ function App() {
         closeModal={() => setModalItemState(false)}
         name={modalItem ? modalItem.name : 'Loading...'}
         link={modalItem ? modalItem.link : 'Loading...'}
-        weather={weatherData ? weatherData.weather[0].main : 'Loading...'}
+        weather={modalItem ? modalItem.weather : 'Loading...'}
       />
     </>
   )
