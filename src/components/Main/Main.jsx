@@ -7,11 +7,20 @@ import { useState } from 'react';
 
 
 export default function Main({ weatherData, handleCardClick, clothingItems }) {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [modalItem, setModalItem] = useState(null);
+    
+    const currentTemp = weatherData ? Math.round(weatherData.main.temp) : null;
+    const weatherCondition = () => {
+        if (currentTemp >= 76) {
+          return 'hot';
+        } else if (currentTemp >= 60) {
+          return 'warm';
+        } else {
+          return 'cold';
+        }
+      }
 
-
-
+    const filteredClothingItems = clothingItems.filter((item) => item.weather === weatherCondition());
+    
 
     return (
         <main className="main">
@@ -22,7 +31,7 @@ export default function Main({ weatherData, handleCardClick, clothingItems }) {
                 weatherData ? `${Math.round(weatherData.main.temp)}°F` : 'Loading...'
             }/ You may want to wear:</h2>
             <div className='card-grid'>
-                {clothingItems.map((item) => {
+                {filteredClothingItems.map((item) => {
                     return (
                         <ItemCard
                             key={item._id}
@@ -30,7 +39,6 @@ export default function Main({ weatherData, handleCardClick, clothingItems }) {
                             link={item.link}
 
                             isOpen={() => {
-                                setIsModalOpen(true);
                                 handleCardClick(item);
                             }}
                         />

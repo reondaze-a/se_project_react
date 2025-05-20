@@ -18,6 +18,7 @@ function App() {
   const [modalFormState, setModalFormState] = useState(false)
   const [modalItemState, setModalItemState] = useState(false)
   const [weatherData, setWeatherData] = useState(null)
+  const [clothingItems, setClothingItems] = useState(defaultClothingItems)
   const [modalItem, setModalItem] = useState(null)
 
   useEffect(() => {
@@ -26,26 +27,13 @@ function App() {
       .catch(console.error);
   }, []);
 
-  const currentTemp = weatherData ? Math.round(weatherData.main.temp) : null;
-  const weatherCondition = () => {
-    if (currentTemp >= 76) {
-      return 'hot';
-    } else if (currentTemp >= 60) {
-      return 'warm';
-    } else {
-      return 'cold';
-    }
-  }
-
-  const filteredClothingItems = defaultClothingItems.filter((item) => item.weather === weatherCondition());
-  
 
   return (
     <>
       <Header openModal={() => setModalFormState(true)} />
       <Main 
         weatherData={weatherData}
-        clothingItems={filteredClothingItems}
+        clothingItems={clothingItems}
         handleCardClick={(item) => {
           setModalItem(item);
           setModalItemState(true);
