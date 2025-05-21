@@ -1,8 +1,10 @@
 import headerLogo from "../../assets/Logo.svg"
-import avatar from "../../assets/avatarpicture.avif"
+import avatarLink from "../../assets/avatarpicture.avif"
 import "./Header.css"
 import { useState, useEffect } from 'react'
 import weatherApi from '../../utils/Api'
+
+const avatar = new URL(avatarLink, import.meta.url).href;
 
 const currentDate = new Date().toLocaleString('default', { month: 'long', day: 'numeric' });
 
