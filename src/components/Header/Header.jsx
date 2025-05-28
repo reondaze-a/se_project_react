@@ -1,8 +1,10 @@
 import headerLogo from "../../assets/Logo.svg"
 import avatarLink from "../../assets/avatarpicture.avif"
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch"
 import "./Header.css"
 import { useState, useEffect } from 'react'
 import weatherApi from '../../utils/Api'
+
 
 const avatar = new URL(avatarLink, import.meta.url).href;
 
@@ -16,6 +18,13 @@ export default function Header({ openModal }) {
         <img src={headerLogo} alt="wtwr logo" />
         <p className="header__date">{currentDate}, Columbus</p>
       </div>
+      <ToggleSwitch
+        isChecked={false}
+        onChange={() => {
+          // Handle toggle switch change
+          console.log("Toggle switch changed");
+        }}
+      />
       <div className="header__profile">
         <button type="button" className="header__add-button" onClick={openModal}>
           + Add clothes

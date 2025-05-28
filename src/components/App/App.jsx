@@ -20,6 +20,7 @@ function App() {
   const [weatherData, setWeatherData] = useState(null)
   const [clothingItems, setClothingItems] = useState(defaultClothingItems)
   const [modalItem, setModalItem] = useState(null)
+  const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState('F')
 
   useEffect(() => {
     api.fetchWeatherData()
