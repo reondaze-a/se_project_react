@@ -6,6 +6,7 @@ import ModalWithForm from '../ModalWithForm/ModalWithForm'
 import Footer from '../Footer/Footer'
 import ItemModal from '../ItemModal/ItemModal'
 import weatherApi from '../../utils/Api'
+import { CurrentTemperatureUnitContext } from '../../contexts/CurrentTemperatureUnitContext'
 import { apiKey, locations, defaultClothingItems } from '../../utils/constants'
 
 const lat = locations.Columbus.latitude;
@@ -28,27 +29,35 @@ function App() {
       .catch(console.error);
   }, []);
 
+  const handleToggleSwitchChange = () => {
+    currentTemperatureUnit === 'F'
+      ? setCurrentTemperatureUnit('C')
+      : setCurrentTemperatureUnit('F');
+
+  };
 
   return (
     <>
-      <Header openModal={() => setModalFormState(true)} />
-      <Main 
-        weatherData={weatherData}
-        clothingItems={clothingItems}
-        handleCardClick={(item) => {
-          setModalItem(item);
-          setModalItemState(true);
-        }}
-      />
-      <Footer />
-      <ModalWithForm isOpen={modalFormState} closeModal={() => setModalFormState(false)}/>
-      <ItemModal
-        isOpen={modalItemState}
-        closeModal={() => setModalItemState(false)}
-        name={modalItem ? modalItem.name : 'Loading...'}
-        link={modalItem ? modalItem.link : 'Loading...'}
-        weather={modalItem ? modalItem.weather : 'Loading...'}
-      />
+      <CurrentTemperatureUnitContext.Provider value={{ currentTemperatureUnit, handleToggleSwitchChange }}>
+        <Header openModal={() => setModalFormState(true)} />
+        <Main 
+          weatherData={weatherData}
+          clothingItems={clothingItems}
+          handleCardClick={(item) => {
+            setModalItem(item);
+            setModalItemState(true);
+          }}
+        />
+        <Footer />
+        <ModalWithForm isOpen={modalFormState} closeModal={() => setModalFormState(false)}/>
+        <ItemModal
+          isOpen={modalItemState}
+          closeModal={() => setModalItemState(false)}
+          name={modalItem ? modalItem.name : 'Loading...'}
+          link={modalItem ? modalItem.link : 'Loading...'}
+          weather={modalItem ? modalItem.weather : 'Loading...'}
+        />
+      </CurrentTemperatureUnitContext.Provider>
     </>
   )
 }

@@ -1,6 +1,6 @@
 import './WeatherCard.css'
-import dayClear from '../../../assets/weather-backgrounds/day-clear.png'
-import { apiKey, locations, weatherBackgrounds } from '../../../utils/constants'
+import { CurrentTemperatureUnitContext } from '../../../contexts/CurrentTemperatureUnitContext';
+import { weatherBackgrounds } from '../../../utils/constants'
 import { useContext } from 'react'
 
 
@@ -15,7 +15,8 @@ if (hour < 18 && hour >= 6) {
 
 
 
-export default function WeatherCard({ weatherData }) {
+export default function WeatherCard({ weatherData, currentTemp }) {
+    const tempData = useContext(CurrentTemperatureUnitContext);
     
     const currentWeather = weatherData ? weatherData.weather[0].main : null;
     const currentWeatherBackground = weatherBackgrounds[partOfDay][currentWeather];
@@ -28,7 +29,7 @@ export default function WeatherCard({ weatherData }) {
         >
             <p 
                 className="weather-card__temperature">{
-                    weatherData ? `${Math.round(weatherData.main.temp)}°F` : 'Loading...'}
+                    weatherData ? currentTemp : 'Loading...'}
             </p>
         </div>
     )

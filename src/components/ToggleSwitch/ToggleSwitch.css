@@ -1,0 +1,33 @@
+.toggle-switch {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-self: flex-start;
+    padding-top: 10px;
+}
+
+.toggle-switch__input {
+    display: none;
+}
+
+.toggle-switch__label {
+    cursor: pointer;
+    width: 55px;
+    height: 2rem;
+    background-size: contain; 
+    background-repeat: no-repeat;
+    position: relative;
+    transition: background-image 0.1s ease;
+}
+
+.toggle-switch__label.unchecked {
+  background-image: url('/temperature-switch/State=Farenheit.png');
+}
+
+.toggle-switch__label.checked {
+  background-image: url('/temperature-switch/State=Celsius.png');
+}
+
+.toggle-switch__label.transition {
+  background-image: url('/temperature-switch/State=Move.png');
+}

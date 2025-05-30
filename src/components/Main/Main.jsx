@@ -3,32 +3,38 @@ import ItemCard from './ItemCard/ItemCard';
 import { defaultClothingItems } from '../../utils/constants';
 import './Main.css';
 import './ItemCard/ItemCard.css';
-import { useState } from 'react';
+import { CurrentTemperatureUnitContext } from '../../contexts/CurrentTemperatureUnitContext';
+import { useState, useContext } from 'react';
 
 
 export default function Main({ weatherData, handleCardClick, clothingItems }) {
-    
-    const currentTemp = weatherData ? Math.round(weatherData.main.temp) : null;
+
+    const tempData = useContext(CurrentTemperatureUnitContext);
+    const defaultTemp = weatherData ? Math.round(weatherData.main.temp) : null;
     const weatherCondition = () => {
-        if (currentTemp >= 76) {
+        if (defaultTemp >= 76) {
           return 'hot';
-        } else if (currentTemp >= 60) {
+        } else if (defaultTemp >= 60) {
           return 'warm';
         } else {
           return 'cold';
         }
       }
+    
+    const temperatureCelsius = defaultTemp ? Math.round((defaultTemp - 32) * 5 / 9) : null;
+    
+    const currentTemp = tempData.currentTemperatureUnit === 'F' ? `${defaultTemp}°F` : `${temperatureCelsius}°C`;
 
     const filteredClothingItems = clothingItems.filter((item) => item.weather === weatherCondition());
     
-
     return (
         <main className="main">
             <WeatherCard 
                 weatherData={weatherData}
+                currentTemp={currentTemp}
             />
             <h2 className="card-grid__header">Today is {
-                weatherData ? `${Math.round(weatherData.main.temp)}°F` : 'Loading...'
+                weatherData ? currentTemp : 'Loading...'
             }/ You may want to wear:</h2>
             <div className='card-grid'>
                 {filteredClothingItems.map((item) => {

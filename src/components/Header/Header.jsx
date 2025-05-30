@@ -10,7 +10,9 @@ const avatar = new URL(avatarLink, import.meta.url).href;
 
 const currentDate = new Date().toLocaleString('default', { month: 'long', day: 'numeric' });
 
-export default function Header({ openModal }) {
+export default function Header({ openModal, handleToggle }) {
+  
+
 
   return (
     <header className="header">
@@ -18,14 +20,9 @@ export default function Header({ openModal }) {
         <img src={headerLogo} alt="wtwr logo" />
         <p className="header__date">{currentDate}, Columbus</p>
       </div>
-      <ToggleSwitch
-        isChecked={false}
-        onChange={() => {
-          // Handle toggle switch change
-          console.log("Toggle switch changed");
-        }}
-      />
+
       <div className="header__profile">
+        <ToggleSwitch />
         <button type="button" className="header__add-button" onClick={openModal}>
           + Add clothes
         </button>

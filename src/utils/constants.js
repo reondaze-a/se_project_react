@@ -79,4 +79,11 @@ const weatherBackgrounds = {
   },
 };
 
-export { apiKey, defaultClothingItems, locations, weatherBackgrounds };
+const temperatureSwitch = {
+  "F" : new URL('/temperature-switch/State=Farenheit.png', import.meta.url).href,
+  "C" : new URL('/temperature-switch/State=Celsius.png', import.meta.url).href,
+  "hover" : new URL('/temperature-switch/State=Hover.png', import.meta.url).href,
+  "moved" : new URL('/temperature-switch/State=Move.png', import.meta.url).href,
+}
+
+export { apiKey, defaultClothingItems, locations, weatherBackgrounds, temperatureSwitch };
