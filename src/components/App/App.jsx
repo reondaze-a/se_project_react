@@ -5,10 +5,14 @@ import Main from '../Main/Main'
 import ModalWithForm from '../ModalWithForm/ModalWithForm'
 import Footer from '../Footer/Footer'
 import ItemModal from '../ItemModal/ItemModal'
+import Profile from '../Profile/Profile'
 import weatherApi from '../../utils/Api'
+import AddItemModal from '../AddItemModal/AddItemModal'
+import { Routes, Route } from "react-router-dom";
 import { CurrentTemperatureUnitContext } from '../../contexts/CurrentTemperatureUnitContext'
 import { apiKey, locations, defaultClothingItems } from '../../utils/constants'
 
+const home = '/se_project_react/';
 const lat = locations.Columbus.latitude;
 const long = locations.Columbus.longitude;
 const api = weatherApi(
@@ -39,17 +43,48 @@ function App() {
   return (
     <>
       <CurrentTemperatureUnitContext.Provider value={{ currentTemperatureUnit, handleToggleSwitchChange }}>
-        <Header openModal={() => setModalFormState(true)} />
-        <Main 
-          weatherData={weatherData}
-          clothingItems={clothingItems}
-          handleCardClick={(item) => {
-            setModalItem(item);
-            setModalItemState(true);
+        <Header openModal={() => setModalFormState(true)} path={home}/>
+
+        <Routes>
+          <Route 
+            path={home}
+            element={
+              <Main 
+                weatherData={weatherData}
+                clothingItems={clothingItems}
+                handleCardClick={(item) => {
+                  setModalItem(item);
+                  setModalItemState(true);
+                }}
+              />
+            } 
+          />
+          <Route 
+            path={`${home}/profile`}
+            element={
+              <Profile 
+                clothingItems={clothingItems} 
+                handleCardClick={(item) => {
+                  setModalItem(item);
+                  setModalItemState(true);
+                }}
+                openModal={() => setModalFormState(true)}  
+                />
+            }
+          />
+        </Routes>
+
+        <Footer />
+        {/* <ModalWithForm isOpen={modalFormState} closeModal={() => setModalFormState(false)}/> */}
+        <AddItemModal
+          isOpen={modalFormState}
+          onClose={() => setModalFormState(false)}
+          onAddItem={(item) => {
+            console.log('Adding item:', item);
+            setClothingItems([item, ...clothingItems]);
+            setModalFormState(false);
           }}
         />
-        <Footer />
-        <ModalWithForm isOpen={modalFormState} closeModal={() => setModalFormState(false)}/>
         <ItemModal
           isOpen={modalItemState}
           closeModal={() => setModalItemState(false)}
@@ -57,6 +92,7 @@ function App() {
           link={modalItem ? modalItem.link : 'Loading...'}
           weather={modalItem ? modalItem.weather : 'Loading...'}
         />
+
       </CurrentTemperatureUnitContext.Provider>
     </>
   )

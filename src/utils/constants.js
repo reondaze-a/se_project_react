@@ -67,6 +67,7 @@ const weatherBackgrounds = {
     "Snow": new URL('../assets/weather-backgrounds/day-snow.png', import.meta.url).href,
     "Thunderstorm": new URL('../assets/weather-backgrounds/day-storm.png', import.meta.url).href,
     "Mist": new URL('../assets/weather-backgrounds/day-fog.png', import.meta.url).href,
+    "Haze": new URL('../assets/weather-backgrounds/day-fog.png', import.meta.url).href,
   },
   "night": {
     "Fog": new URL('../assets/weather-backgrounds/night-fog.png', import.meta.url).href,
@@ -76,6 +77,7 @@ const weatherBackgrounds = {
     "Snow": new URL('../assets/weather-backgrounds/night-snow.png', import.meta.url).href,
     "Thunderstorm": new URL('../assets/weather-backgrounds/night-storm.png', import.meta.url).href,
     "Mist": new URL('../assets/weather-backgrounds/night-fog.png', import.meta.url).href,
+    "Haze": new URL('../assets/weather-backgrounds/night-fog.png', import.meta.url).href,
   },
 };
 

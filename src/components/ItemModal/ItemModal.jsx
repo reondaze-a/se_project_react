@@ -16,9 +16,14 @@ export default function ItemModal({ isOpen, closeModal, name, link, weather }) {
                     </button>
                     <img src={link} alt={name} className="item-modal_image" />
                 </div>
-                <div className="item__modal-text">
-                    <h2 className="item-modal__title">{name}</h2>
-                    <p className="item-modal__desc">Weather: {weather}</p>
+                <div className="item-modal__content">
+                    <div className="item-modal__text">
+                        <h2 className="item-modal__title">{name}</h2>
+                        <p className="item-modal__desc">Weather: {weather}</p>
+                    </div>
+                    <button className="item-modal__delete-button">
+                        Delete item
+                    </button>
                 </div>
             </div>
         </div>

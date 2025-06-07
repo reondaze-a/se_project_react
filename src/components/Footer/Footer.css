@@ -2,6 +2,7 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
+    padding-top: 150px;
 }
 
 .footer__text {
