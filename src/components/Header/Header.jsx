@@ -28,7 +28,7 @@ export default function Header({ openModal, path }) {
           + Add clothes
         </button>
         <div className="header__profile-name">Abraham Efraim</div>
-        <NavLink to={`/profile`} className="header__profile-link">
+        <NavLink to={"/profile"} className="header__profile-link">
           <div className="header__profile-avatar-container">
             <img src={avatar} alt="profile picture" className="header__profile-avatar" />
           </div>

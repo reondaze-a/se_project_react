@@ -14,8 +14,7 @@ import { CurrentTemperatureUnitContext } from '../../contexts/CurrentTemperature
 import { apiKey, locations, defaultClothingItems } from '../../utils/constants'
 
 
-const home = '/se_project_react'; // If my path is not this, it won't work due to homepage setting
-// Unfortunately, I'd fail the automated test with this path.
+const home = '/se_project_react';
 
 const lat = locations.Columbus.latitude;
 const long = locations.Columbus.longitude;
@@ -75,7 +74,7 @@ function App() {
             } 
           />
           <Route 
-            path={`/profile`}
+            path={"/profile"}
             element={
               <Profile 
                 clothingItems={clothingItems} 
