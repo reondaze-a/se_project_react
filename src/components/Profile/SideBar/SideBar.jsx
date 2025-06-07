@@ -13,5 +13,5 @@ export default function SideBar() {
         <h1 className="sidebar__name">Abraham Efraim</h1>
       </div>
     </div>
-  );
+  ); 
 }
