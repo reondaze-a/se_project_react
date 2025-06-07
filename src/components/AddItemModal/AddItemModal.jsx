@@ -29,7 +29,8 @@ export default function AddItemModal({ isOpen, onClose, onAddItem }) {
                     weather: itemWeather
                 }
             )} 
-            title="New garment">
+            title="New garment"
+        >
             <label htmlFor="garment-name" className="modal__label">
                 <span className="modal__label_title">Name</span>
                 <input

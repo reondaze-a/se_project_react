@@ -8,9 +8,11 @@ import ItemModal from '../ItemModal/ItemModal'
 import Profile from '../Profile/Profile'
 import weatherApi from '../../utils/Api'
 import AddItemModal from '../AddItemModal/AddItemModal'
+import DeleteItemModal from '../DeleteItemModal/DeleteItemModal'
 import { Routes, Route } from "react-router-dom";
 import { CurrentTemperatureUnitContext } from '../../contexts/CurrentTemperatureUnitContext'
 import { apiKey, locations, defaultClothingItems } from '../../utils/constants'
+
 
 const home = '/se_project_react/';
 const lat = locations.Columbus.latitude;
@@ -22,6 +24,7 @@ const api = weatherApi(
 function App() {
   const [modalFormState, setModalFormState] = useState(false)
   const [modalItemState, setModalItemState] = useState(false)
+  const [modalDeleteItemState, setModalDeleteItemState] = useState(false)
   const [weatherData, setWeatherData] = useState(null)
   const [clothingItems, setClothingItems] = useState(defaultClothingItems)
   const [modalItem, setModalItem] = useState(null)
@@ -91,7 +94,20 @@ function App() {
           name={modalItem ? modalItem.name : 'Loading...'}
           link={modalItem ? modalItem.link : 'Loading...'}
           weather={modalItem ? modalItem.weather : 'Loading...'}
+          openDeleteModal={() => {
+            setModalDeleteItemState(true);
+          }}
         />
+        <DeleteItemModal
+          isOpen={modalDeleteItemState}
+          closeModal={() => setModalDeleteItemState(false)}
+          item={modalItem}
+          onDelete={(itemId) => {
+            setClothingItems(clothingItems.filter(item => item.id !== itemId));
+            setModalDeleteItemState(false);
+          }}
+        />
+
 
       </CurrentTemperatureUnitContext.Provider>
     </>

@@ -1,0 +1,66 @@
+.delete-item-modal__container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    max-width: 500px;
+    background-color: white;
+    border-radius: 16px;
+    overflow: visible;
+    padding: 60px 150px;
+}
+
+.delete-item-modal__text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    font-family: "Cabinet Grotesk", sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    padding-bottom: 10px;
+}
+
+.delete-item-modal__text:last-of-type {
+    padding-bottom: 40px;
+}
+
+.delete-item-modal__close-button {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    flex-direction: column;
+}
+
+.delete-item-modal__button {
+    max-width: 200px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-family: "Cabinet Grotesk", sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 0;
+    opacity: 0.8;
+    transition: opacity 0.2s ease-in-out;
+}
+
+
+.delete-item-modal__button:hover {
+    opacity: 1;
+}
+
+.confirm-button {
+    color: #FF4D00;
+}
