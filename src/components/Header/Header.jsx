@@ -16,7 +16,7 @@ export default function Header({ openModal, path }) {
   return (
     <header className="header">
       <div className="header__info">
-        <NavLink to={path}>
+        <NavLink to={"/"}>
           <img src={headerLogo} alt="wtwr logo" />
         </NavLink>
         <p className="header__date">{currentDate}, Columbus</p>
@@ -28,7 +28,7 @@ export default function Header({ openModal, path }) {
           + Add clothes
         </button>
         <div className="header__profile-name">Abraham Efraim</div>
-        <NavLink to={`${path}/profile`} className="header__profile-link">
+        <NavLink to={`/profile`} className="header__profile-link">
           <div className="header__profile-avatar-container">
             <img src={avatar} alt="profile picture" className="header__profile-avatar" />
           </div>
