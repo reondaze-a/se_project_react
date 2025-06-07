@@ -23,9 +23,9 @@ export default function AddItemModal({ isOpen, onClose, onAddItem }) {
             closeModal={onClose} 
             handleSubmit={() => onAddItem(
                 {
-                    id: uuidv4(),
+                    _id: uuidv4(),
                     name: itemName,
-                    link: itemLink,
+                    imageUrl: itemLink,
                     weather: itemWeather
                 }
             )} 

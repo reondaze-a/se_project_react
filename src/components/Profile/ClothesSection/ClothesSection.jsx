@@ -17,7 +17,7 @@ export default function ClothesSection({ clothingItems, handleCardClick, openMod
             <ItemCard
                 key={uuidv4()}
                 name={item.name}
-                link={item.link}
+                link={item.imageUrl}
 
                 isOpen={() => {
                     handleCardClick(item);

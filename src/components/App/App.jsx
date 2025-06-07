@@ -102,7 +102,7 @@ function App() {
           isOpen={modalItemState}
           closeModal={() => setModalItemState(false)}
           name={modalItem ? modalItem.name : 'Loading...'}
-          link={modalItem ? modalItem.link : 'Loading...'}
+          link={modalItem ? modalItem.imageUrl : 'Loading...'}
           weather={modalItem ? modalItem.weather : 'Loading...'}
           openDeleteModal={() => {
             setModalDeleteItemState(true);

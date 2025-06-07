@@ -42,7 +42,7 @@ export default function Main({ weatherData, handleCardClick, clothingItems }) {
                         <ItemCard
                             key={item._id}
                             name={item.name}
-                            link={item.link}
+                            link={item.imageUrl}
 
                             isOpen={() => {
                                 handleCardClick(item);

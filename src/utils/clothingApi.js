@@ -1,6 +1,6 @@
 export default function clothingApi(url) {
 
-    function checkResponse(res) {
+    function _checkResponse(res) {
         if (res.ok) {
             return res.json();
         }
@@ -8,7 +8,7 @@ export default function clothingApi(url) {
     }
 
     function fetchClothingItems() {
-        return fetch(`${url}/items`).then(checkResponse)
+        return fetch(`${url}/items`).then(_checkResponse)
     }
 
     function addClothingItem(item) {
@@ -31,5 +31,5 @@ export default function clothingApi(url) {
         }).then(checkResponse);
     }
 
-    return {fetchClothingItems, addClothingItem}
+    return {fetchClothingItems, addClothingItem, deleteClothingItem}
 }

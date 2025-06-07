@@ -10,6 +10,7 @@
     overflow: hidden;
     border: 1px solid #0000004D;
     cursor: pointer;
+    aspect-ratio: 1 / 1;
 }
 
 .item-card:hover {
@@ -34,4 +35,6 @@
 
 .item-card__image {
     border-radius: 19px;
+    width: 100%;
+    aspect-ratio: 1 / 1;
 }
