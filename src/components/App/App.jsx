@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import Header from '../Header/Header'
 import Main from '../Main/Main'
-import ModalWithForm from '../ModalWithForm/ModalWithForm'
 import Footer from '../Footer/Footer'
 import ItemModal from '../ItemModal/ItemModal'
 import Profile from '../Profile/Profile'
@@ -15,7 +14,7 @@ import { CurrentTemperatureUnitContext } from '../../contexts/CurrentTemperature
 import { apiKey, locations, defaultClothingItems } from '../../utils/constants'
 
 
-const home = '/se_project_react/';
+const home = '/se_project_react';
 const lat = locations.Columbus.latitude;
 const long = locations.Columbus.longitude;
 const api = weatherApi(
