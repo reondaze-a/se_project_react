@@ -83,7 +83,6 @@ function App() {
           isOpen={modalFormState}
           onClose={() => setModalFormState(false)}
           onAddItem={(item) => {
-            console.log('Adding item:', item);
             setClothingItems([item, ...clothingItems]);
             setModalFormState(false);
           }}
@@ -102,9 +101,10 @@ function App() {
           isOpen={modalDeleteItemState}
           closeModal={() => setModalDeleteItemState(false)}
           item={modalItem}
-          onDelete={(itemId) => {
-            setClothingItems(clothingItems.filter(item => item.id !== itemId));
+          onDelete={() => {
+            setClothingItems(clothingItems.filter((item) => item._id !== modalItem._id));
             setModalDeleteItemState(false);
+            setModalItemState(false);
           }}
         />
 
