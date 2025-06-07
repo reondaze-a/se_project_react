@@ -1,4 +1,4 @@
-import './SideBar.css';
+import './Sidebar.css';
 import avatarLink from "../../../assets/avatarpicture.avif"
 
 const avatar = new URL(avatarLink, import.meta.url).href;

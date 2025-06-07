@@ -1,5 +1,5 @@
 import './Profile.css';
-import SideBar from './SideBar/SideBar';
+import Sidebar from './SideBar/Sidebar';
 import ClothesSection from './ClothesSection/ClothesSection';
 
 
@@ -7,7 +7,7 @@ import ClothesSection from './ClothesSection/ClothesSection';
 export default function Profile({ clothingItems, handleCardClick, openModal }) {
   return (
     <section className="profile">
-      <SideBar />
+      <Sidebar />
       <ClothesSection clothingItems={clothingItems} handleCardClick={handleCardClick} openModal={openModal}/>
     </section>
   );
