@@ -1,7 +1,7 @@
 import headerLogo from "../../assets/Logo.svg"
 import avatarLink from "../../assets/avatarpicture.avif"
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch"
-import { Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import "./Header.css"
 
 
@@ -16,9 +16,9 @@ export default function Header({ openModal, path }) {
   return (
     <header className="header">
       <div className="header__info">
-        <Link to={path}>
+        <NavLink to={path}>
           <img src={headerLogo} alt="wtwr logo" />
-        </Link>
+        </NavLink>
         <p className="header__date">{currentDate}, Columbus</p>
       </div>
 
@@ -28,11 +28,11 @@ export default function Header({ openModal, path }) {
           + Add clothes
         </button>
         <div className="header__profile-name">Abraham Efraim</div>
-        <Link to={`${path}/profile`} className="header__profile-link">
+        <NavLink to={`${path}/profile`} className="header__profile-link">
           <div className="header__profile-avatar-container">
             <img src={avatar} alt="profile picture" className="header__profile-avatar" />
           </div>
-        </Link>
+        </NavLink>
       </div>
     </header>
   )
