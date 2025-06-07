@@ -13,3 +13,4 @@ export default function weatherApi(url) {
 
     return {fetchWeatherData}
 }
+

@@ -7,6 +7,7 @@ import Footer from '../Footer/Footer'
 import ItemModal from '../ItemModal/ItemModal'
 import Profile from '../Profile/Profile'
 import weatherApi from '../../utils/Api'
+import clothingApi from '../../utils/clothingApi'
 import AddItemModal from '../AddItemModal/AddItemModal'
 import DeleteItemModal from '../DeleteItemModal/DeleteItemModal'
 import { Routes, Route } from "react-router-dom";
@@ -21,6 +22,10 @@ const api = weatherApi(
     `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=${apiKey}`
   );
 
+const clothingData = clothingApi(
+  'http://localhost:3001'
+);
+
 function App() {
   const [modalFormState, setModalFormState] = useState(false)
   const [modalItemState, setModalItemState] = useState(false)
@@ -33,6 +38,12 @@ function App() {
   useEffect(() => {
     api.fetchWeatherData()
       .then(setWeatherData)
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    clothingData.fetchClothingItems()
+      .then(console.log)
       .catch(console.error);
   }, []);
 
