@@ -1,18 +1,15 @@
+import weatherApi from "./weatherApi";
+
+const checkResponse = weatherApi()._checkResponse;
+
 export default function clothingApi(url) {
 
-    function _checkResponse(res) {
-        if (res.ok) {
-            return res.json();
-        }
-        return Promise.reject(`Error: ${res.status}`);
-    }
-
     function fetchClothingItems() {
-        return fetch(`${url}/items`).then(_checkResponse)
+        return fetch(`${url}/items`).then(checkResponse)
     }
 
     function addClothingItem(item) {
-        return fetch(`${url}`, {
+        return fetch(`${url}/items`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -22,7 +19,7 @@ export default function clothingApi(url) {
     }
 
     function deleteClothingItem(id) {
-        return fetch(`${url}/${id}`, {
+        return fetch(`${url}/items/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'

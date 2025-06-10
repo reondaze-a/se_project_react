@@ -1,6 +1,6 @@
 export default function weatherApi(url) {
 
-    function checkResponse(res) {
+    function _checkResponse(res) {
         if (res.ok) {
             return res.json();
         }
@@ -8,9 +8,9 @@ export default function weatherApi(url) {
     }
 
     function fetchWeatherData() {
-        return fetch(`${url}`).then(checkResponse)
+        return fetch(`${url}`).then(_checkResponse)
     }
 
-    return {fetchWeatherData}
+    return {fetchWeatherData, _checkResponse}
 }
 

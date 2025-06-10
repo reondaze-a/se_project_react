@@ -5,7 +5,7 @@ import Main from '../Main/Main'
 import Footer from '../Footer/Footer'
 import ItemModal from '../ItemModal/ItemModal'
 import Profile from '../Profile/Profile'
-import weatherApi from '../../utils/Api'
+import weatherApi from '../../utils/weatherApi'
 import clothingApi from '../../utils/clothingApi'
 import AddItemModal from '../AddItemModal/AddItemModal'
 import DeleteItemModal from '../DeleteItemModal/DeleteItemModal'
@@ -18,11 +18,11 @@ const home = '/se_project_react';
 
 const lat = locations.Columbus.latitude;
 const long = locations.Columbus.longitude;
-const api = weatherApi(
+const weather = weatherApi(
     `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=${apiKey}`
   );
 
-const clothingData = clothingApi(
+const clothes = clothingApi(
   'http://localhost:3001'
 );
 
@@ -31,21 +31,22 @@ function App() {
   const [modalItemState, setModalItemState] = useState(false)
   const [modalDeleteItemState, setModalDeleteItemState] = useState(false)
   const [weatherData, setWeatherData] = useState(null)
-  const [clothingItems, setClothingItems] = useState(defaultClothingItems)
+  const [clothingItems, setClothingItems] = useState([])
   const [modalItem, setModalItem] = useState(null)
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState('F')
 
   useEffect(() => {
-    api.fetchWeatherData()
+    weather.fetchWeatherData()
       .then(setWeatherData)
       .catch(console.error);
   }, []);
 
   useEffect(() => {
-    clothingData.fetchClothingItems()
-      .then(console.log)
+    clothes.fetchClothingItems()
+      .then(setClothingItems)
       .catch(console.error);
   }, []);
+
 
   const handleToggleSwitchChange = () => {
     currentTemperatureUnit === 'F'
@@ -94,6 +95,7 @@ function App() {
           isOpen={modalFormState}
           onClose={() => setModalFormState(false)}
           onAddItem={(item) => {
+            clothes.addClothingItem(item);
             setClothingItems([item, ...clothingItems]);
             setModalFormState(false);
           }}
@@ -114,6 +116,7 @@ function App() {
           item={modalItem}
           onDelete={() => {
             setClothingItems(clothingItems.filter((item) => item._id !== modalItem._id));
+            clothes.deleteClothingItem(modalItem._id);
             setModalDeleteItemState(false);
             setModalItemState(false);
           }}
