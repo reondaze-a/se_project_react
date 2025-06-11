@@ -29,7 +29,6 @@ export default function ModalWithForm({ children, isOpen, closeModal, handleSubm
                             onSubmit={(e) => {
                                 e.preventDefault();
                                 handleSubmit();
-                                closeModal();
                             }}
                         >
                             {children}

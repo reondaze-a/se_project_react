@@ -26,7 +26,8 @@ export default function AddItemModal({ isOpen, onClose, onAddItem }) {
                     _id: uuidv4(),
                     name: itemName,
                     imageUrl: itemLink,
-                    weather: itemWeather
+                    weather: itemWeather,
+                    createdAt: Date.now()
                 }
             )} 
             title="New garment"

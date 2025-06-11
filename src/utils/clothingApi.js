@@ -15,7 +15,7 @@ export default function clothingApi(url) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(item)
-        }).then(checkResponse);
+        })
     }
 
     function deleteClothingItem(id) {
@@ -25,7 +25,7 @@ export default function clothingApi(url) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ _id: id })
-        }).then(checkResponse);
+        })
     }
 
     return {fetchClothingItems, addClothingItem, deleteClothingItem}
