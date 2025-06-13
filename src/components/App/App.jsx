@@ -52,89 +52,87 @@ function App() {
   };
 
   return (
-    <>
-      <CurrentTemperatureUnitContext.Provider
-        value={{ currentTemperatureUnit, handleToggleSwitchChange }}
-      >
-        <Header openModal={() => setModalFormState(true)} path={home} />
+    <CurrentTemperatureUnitContext.Provider
+      value={{ currentTemperatureUnit, handleToggleSwitchChange }}
+    >
+      <Header openModal={() => setModalFormState(true)} path={home} />
 
-        <Routes>
-          <Route
-            path={"/"}
-            element={
-              <Main
-                weatherData={weatherData}
-                clothingItems={clothingItems}
-                handleCardClick={(item) => {
-                  setModalItem(item);
-                  setModalItemState(true);
-                }}
-              />
-            }
-          />
-          <Route
-            path={"/profile"}
-            element={
-              <Profile
-                clothingItems={clothingItems}
-                handleCardClick={(item) => {
-                  setModalItem(item);
-                  setModalItemState(true);
-                }}
-                openModal={() => setModalFormState(true)}
-              />
-            }
-          />
-        </Routes>
+      <Routes>
+        <Route
+          path={"/"}
+          element={
+            <Main
+              weatherData={weatherData}
+              clothingItems={clothingItems}
+              handleCardClick={(item) => {
+                setModalItem(item);
+                setModalItemState(true);
+              }}
+            />
+          }
+        />
+        <Route
+          path={"/profile"}
+          element={
+            <Profile
+              clothingItems={clothingItems}
+              handleCardClick={(item) => {
+                setModalItem(item);
+                setModalItemState(true);
+              }}
+              openModal={() => setModalFormState(true)}
+            />
+          }
+        />
+      </Routes>
 
-        <Footer />
-        {/* <ModalWithForm isOpen={modalFormState} closeModal={() => setModalFormState(false)}/> */}
-        <AddItemModal
-          isOpen={modalFormState}
-          onClose={() => setModalFormState(false)}
-          onAddItem={(item) => {
-            clothes
-              .addClothingItem(item)
-              .then(() => {
-                setClothingItems([item, ...clothingItems]);
-                setModalFormState(false);
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          }}
-        />
-        <ItemModal
-          isOpen={modalItemState}
-          closeModal={() => setModalItemState(false)}
-          name={modalItem ? modalItem.name : "Loading..."}
-          link={modalItem ? modalItem.imageUrl : "Loading..."}
-          weather={modalItem ? modalItem.weather : "Loading..."}
-          openDeleteModal={() => {
-            setModalDeleteItemState(true);
-          }}
-        />
-        <DeleteItemModal
-          isOpen={modalDeleteItemState}
-          closeModal={() => setModalDeleteItemState(false)}
-          item={modalItem}
-          onDelete={() => {
-            clothes
-              .deleteClothingItem(modalItem._id)
-              .then(() => {
-                setClothingItems(
-                  clothingItems.filter((item) => item._id !== modalItem._id)
-                );
-                setModalDeleteItemState(false);
-                setModalItemState(false);
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          }}
-        />
-      </CurrentTemperatureUnitContext.Provider>
-    </>
+      <Footer />
+      {/* <ModalWithForm isOpen={modalFormState} closeModal={() => setModalFormState(false)}/> */}
+      <AddItemModal
+        isOpen={modalFormState}
+        onClose={() => setModalFormState(false)}
+        onAddItem={(item) => {
+          clothes
+            .addClothingItem(item)
+            .then(() => {
+              setClothingItems([item, ...clothingItems]);
+              setModalFormState(false);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }}
+      />
+      <ItemModal
+        isOpen={modalItemState}
+        closeModal={() => setModalItemState(false)}
+        name={modalItem ? modalItem.name : "Loading..."}
+        link={modalItem ? modalItem.imageUrl : "Loading..."}
+        weather={modalItem ? modalItem.weather : "Loading..."}
+        openDeleteModal={() => {
+          setModalDeleteItemState(true);
+        }}
+      />
+      <DeleteItemModal
+        isOpen={modalDeleteItemState}
+        closeModal={() => setModalDeleteItemState(false)}
+        item={modalItem}
+        onDelete={() => {
+          clothes
+            .deleteClothingItem(modalItem._id)
+            .then(() => {
+              setClothingItems(
+                clothingItems.filter((item) => item._id !== modalItem._id)
+              );
+              setModalDeleteItemState(false);
+              setModalItemState(false);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }}
+      />
+    </CurrentTemperatureUnitContext.Provider>
   );
 }
 
