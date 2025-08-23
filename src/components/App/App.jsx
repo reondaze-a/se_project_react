@@ -21,7 +21,7 @@ const weather = weatherApi(
   `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=${apiKey}`
 );
 
-const clothes = clothingApi("http://localhost:3001");
+const clothes = clothingApi("http://localhost:3001"); // URL of the backend server
 
 function App() {
   const [modalFormState, setModalFormState] = useState(false);

@@ -1,11 +1,9 @@
-import weatherApi from "./weatherApi";
-
-const checkResponse = weatherApi()._checkResponse;
+import { _checkResponse } from "./constants";
 
 export default function clothingApi(url) {
 
     function fetchClothingItems() {
-        return fetch(`${url}/items`).then(checkResponse)
+        return fetch(`${url}/items`).then(_checkResponse)
     }
 
     function addClothingItem(item) {

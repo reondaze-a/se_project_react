@@ -23,9 +23,9 @@ export default function ModalWithForm({ children, isOpen, closeModal, handleSubm
                     </div>
                     <div className="modal__content">
                         <form
-                            name="new-garment"
+                            name="new-form"
                             className="modal__form"
-                            id="new-garment-form"
+                            id="new-form"
                             onSubmit={(e) => {
                                 e.preventDefault();
                                 handleSubmit();

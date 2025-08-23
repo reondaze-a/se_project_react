@@ -154,4 +154,11 @@ const temperatureSwitch = {
   "moved" : new URL('/temperature-switch/State=Move.png', import.meta.url).href,
 }
 
-export { apiKey, defaultClothingItems, locations, weatherBackgrounds, temperatureSwitch };
+const _checkResponse = (res) => {
+  if (res.ok) {
+      return res.json();
+  }
+    return Promise.reject(`Error: ${res.status}`);
+}
+
+export { apiKey, defaultClothingItems, locations, weatherBackgrounds, temperatureSwitch, _checkResponse };
