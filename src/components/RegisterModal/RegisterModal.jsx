@@ -1,37 +1,40 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { v4 as uuidv4 } from 'uuid';
 import { useState } from "react";
 import './RegisterModal.css';
 import '../ModalWithForm/ModalWithForm.css';
 
 
 
-export default function RegisterModal({ isOpen, onClose }) {
-    const [itemName, setItemName] = useState('');
+
+
+export default function RegisterModal({ isOpen, onClose, onRegister }) {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [name, setName] = useState("");
     const [avatarLink, setAvatarLink] = useState('');
+    const [error, setError] = useState("");
 
     return (
         <ModalWithForm 
             isOpen={isOpen} 
             closeModal={onClose} 
-            handleSubmit={() => onAddItem(
+            handleSubmit={() => onRegister(
                 {
-                    _id: uuidv4(),
-                    name: itemName,
-                    imageUrl: itemLink,
-                    weather: itemWeather,
-                    createdAt: Date.now()
+                    name: name,
+                    email: email,
+                    avatar: avatarLink,
+                    password: password
                 }
             )} 
             title="Sign up"
         >
-            <label htmlFor="garment-name" className="modal__label">
-                <span className="modal__label_title">Name</span>
+            <label htmlFor="email" className="modal__label">
+                <span className="modal__label_title">Email</span>
                 <input
-                    id="garment-name"
-                    type="text"
+                    id="email"
+                    type="email"
                     className="modal__input"
-                    placeholder="Name"
+                    placeholder="Email"
                     required
                     value={itemName}
                     onChange={(e) => setItemName(e.target.value)}

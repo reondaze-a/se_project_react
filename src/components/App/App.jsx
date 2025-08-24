@@ -7,6 +7,7 @@ import ItemModal from "../ItemModal/ItemModal";
 import Profile from "../Profile/Profile";
 import weatherApi from "../../utils/weatherApi";
 import clothingApi from "../../utils/clothingApi";
+import auth from "../../utils/auth";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
 import { Routes, Route } from "react-router-dom";
@@ -17,11 +18,13 @@ const home = "/se_project_react";
 
 const lat = locations.Columbus.latitude;
 const long = locations.Columbus.longitude;
+
+// API calls with uniform 
 const weather = weatherApi(
   `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=${apiKey}`
 );
-
-const clothes = clothingApi("http://localhost:3001"); // URL of the backend server
+const clothes = clothingApi("http://localhost:3001"); 
+const userData = auth("http://localhost:3001"); 
 
 function App() {
   const [modalFormState, setModalFormState] = useState(false);

@@ -13,7 +13,7 @@ export default function clothingApi(url) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(item)
-        })
+        }).then(_checkResponse);
     }
 
     function deleteClothingItem(id) {
@@ -23,7 +23,7 @@ export default function clothingApi(url) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ _id: id })
-        })
+        }).then(_checkResponse);
     }
 
     return {fetchClothingItems, addClothingItem, deleteClothingItem}

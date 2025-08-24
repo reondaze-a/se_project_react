@@ -9,7 +9,7 @@ const avatar = new URL(avatarLink, import.meta.url).href;
 
 const currentDate = new Date().toLocaleString('default', { month: 'long', day: 'numeric' });
 
-export default function Header({ openModal, path }) {
+export default function Header({ openModal }) {
   
 
 
