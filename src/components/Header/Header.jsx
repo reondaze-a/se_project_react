@@ -9,7 +9,7 @@ const avatar = new URL(avatarLink, import.meta.url).href;
 
 const currentDate = new Date().toLocaleString('default', { month: 'long', day: 'numeric' });
 
-export default function Header({ openModal }) {
+export default function Header({ openAddItemModal }) {
   
 
 
@@ -24,7 +24,7 @@ export default function Header({ openModal }) {
 
       <div className="header__profile">
         <ToggleSwitch />
-        <button type="button" className="header__add-button" onClick={openModal}>
+        <button type="button" className="header__add-button" onClick={openAddItemModal}>
           + Add clothes
         </button>
         <div className="header__profile-name">Abraham Efraim</div>

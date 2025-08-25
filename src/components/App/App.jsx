@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
@@ -10,12 +11,14 @@ import clothingApi from "../../utils/clothingApi";
 import auth from "../../utils/auth";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
+import RegisterModal from "../RegisterModal/RegisterModal";
 import { Routes, Route } from "react-router-dom";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { apiKey, locations, defaultClothingItems } from "../../utils/constants";
+import { useAuth } from "../../contexts/AuthContext";
 
 const home = "/se_project_react";
-
+const { isLoggedIn, setIsLoggedIn } = useAuth();
 const lat = locations.Columbus.latitude;
 const long = locations.Columbus.longitude;
 
@@ -27,7 +30,8 @@ const clothes = clothingApi("http://localhost:3001");
 const userData = auth("http://localhost:3001"); 
 
 function App() {
-  const [modalFormState, setModalFormState] = useState(false);
+  const [modalRegisterState, setModalRegisterState] = useState(false);
+  const [modalAddItemState, setModalAddItemState] = useState(false);
   const [modalItemState, setModalItemState] = useState(false);
   const [modalDeleteItemState, setModalDeleteItemState] = useState(false);
   const [weatherData, setWeatherData] = useState(null);
@@ -58,7 +62,7 @@ function App() {
     <CurrentTemperatureUnitContext.Provider
       value={{ currentTemperatureUnit, handleToggleSwitchChange }}
     >
-      <Header openModal={() => setModalFormState(true)} path={home} />
+      <Header openAddItemModal={() => setModalAddItemState(true)} path={home} />
 
       <Routes>
         <Route
@@ -77,14 +81,16 @@ function App() {
         <Route
           path={"/profile"}
           element={
-            <Profile
-              clothingItems={clothingItems}
-              handleCardClick={(item) => {
-                setModalItem(item);
-                setModalItemState(true);
-              }}
-              openModal={() => setModalFormState(true)}
-            />
+            <ProtectedRoute isLoggedIn={isLoggedIn}>
+              <Profile
+                clothingItems={clothingItems}
+                handleCardClick={(item) => {
+                  setModalItem(item);
+                  setModalItemState(true);
+                }}
+                openModal={() => setModalFormState(true)}
+              />
+            </ProtectedRoute>
           }
         />
       </Routes>
@@ -92,14 +98,14 @@ function App() {
       <Footer />
       {/* <ModalWithForm isOpen={modalFormState} closeModal={() => setModalFormState(false)}/> */}
       <AddItemModal
-        isOpen={modalFormState}
-        onClose={() => setModalFormState(false)}
+        isOpen={modalAddItemState}
+        onClose={() => setModalAddItemState(false)}
         onAddItem={(item) => {
           clothes
             .addClothingItem(item)
             .then(() => {
               setClothingItems([item, ...clothingItems]);
-              setModalFormState(false);
+              setModalAddItemState(false);
             })
             .catch((err) => {
               console.log(err);
@@ -134,6 +140,11 @@ function App() {
               console.log(err);
             });
         }}
+      />
+      <RegisterModal
+        isOpen={modalRegisterState}
+        onClose={() => setModalRegisterState(false)}
+        onRegister={() => {}}
       />
     </CurrentTemperatureUnitContext.Provider>
   );

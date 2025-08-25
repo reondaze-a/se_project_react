@@ -36,24 +36,54 @@ export default function RegisterModal({ isOpen, onClose, onRegister }) {
                     className="modal__input"
                     placeholder="Email"
                     required
-                    value={itemName}
-                    onChange={(e) => setItemName(e.target.value)}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <span
+                    className="modal__error-text post-link-error"
+                ></span>
+            </label>
+            <label htmlFor="password" className="modal__label">
+                <span className="modal__label_title">Password</span>
+                <input
+                    id="password"
+                    type="password"
+                    className="modal__input"
+                    placeholder="Password"
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                <span
+                    className="modal__error-text post-link-error"
+                ></span>
+            </label>
+            <label htmlFor="name" className="modal__label">
+                <span className="modal__label_title">Name</span>
+                <input
+                    id="name"
+                    type="text"
+                    className="modal__input"
+                    placeholder="Name"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                 />
                 <span
                     className="modal__error-text post-link-error"
                 ></span>
             </label>
             <label htmlFor="avatar-url" className="modal__label">
-                <span className="modal__label_title">Image</span>
+                <span className="modal__label_title">Avatar URL</span>
                 <input
                     id="avatar-url"
                     type="url"
                     className="modal__input"
-                    placeholder="Image URL"
+                    placeholder="Avatar URL"
                     minLength="2"
                     maxLength="120"
                     required
-                    value={itemLink}
+                    value={avatarLink}
                     onChange={(e) => setAvatarLink(e.target.value)}
                 />
                 <span
