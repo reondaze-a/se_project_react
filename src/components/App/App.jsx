@@ -16,6 +16,7 @@ import { Routes, Route } from "react-router-dom";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { apiKey, locations, defaultClothingItems } from "../../utils/constants";
 import { useAuth } from "../../contexts/AuthContext";
+import LoginModal from "../LoginModal/LoginModal";
 
 const home = "/se_project_react";
 
@@ -33,6 +34,7 @@ function App() {
   const { isLoggedIn, setIsLoggedIn } = useAuth();
 
   const [modalRegisterState, setModalRegisterState] = useState(false);
+  const [modalLoginState, setModalLoginState] = useState(false);
   const [modalAddItemState, setModalAddItemState] = useState(false);
   const [modalItemState, setModalItemState] = useState(false);
   const [modalDeleteItemState, setModalDeleteItemState] = useState(false);
@@ -64,7 +66,12 @@ function App() {
     <CurrentTemperatureUnitContext.Provider
       value={{ currentTemperatureUnit, handleToggleSwitchChange }}
     >
-      <Header openAddItemModal={() => setModalAddItemState(true)} path={home} />
+      <Header 
+        openAddItemModal={() => setModalAddItemState(true)} 
+        openRegisterModal={() => setModalRegisterState(true)}
+        openLoginModal={() => setModalLoginState(true)}
+        path={home} 
+      />
 
       <Routes>
         <Route
@@ -147,6 +154,11 @@ function App() {
         isOpen={modalRegisterState}
         onClose={() => setModalRegisterState(false)}
         onRegister={() => {}}
+      />
+      <LoginModal
+        isOpen={modalLoginState}
+        onClose={() => setModalLoginState(false)}
+        OnLogin={() => {}}
       />
     </CurrentTemperatureUnitContext.Provider>
   );
