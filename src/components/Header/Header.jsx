@@ -22,17 +22,19 @@ export default function Header({ openAddItemModal }) {
         <p className="header__date">{currentDate}, Columbus</p>
       </div>
 
-      <div className="header__profile">
+      <div className="header__right-side">
         <ToggleSwitch />
-        <button type="button" className="header__add-button" onClick={openAddItemModal}>
-          + Add clothes
-        </button>
-        <div className="header__profile-name">Abraham Efraim</div>
-        <NavLink to={"/profile"} className="header__profile-link">
-          <div className="header__profile-avatar-container">
-            <img src={avatar} alt="profile picture" className="header__profile-avatar" />
-          </div>
-        </NavLink>
+        <div className="header__profile">
+          <button type="button" className="header__add-button" onClick={openAddItemModal}>
+            + Add clothes
+          </button>
+          <div className="header__profile-name">Abraham Efraim</div>
+          <NavLink to={"/profile"} className="header__profile-link">
+            <div className="header__profile-avatar-container">
+              <img src={avatar} alt="profile picture" className="header__profile-avatar" />
+            </div>
+          </NavLink>
+        </div>
       </div>
     </header>
   )

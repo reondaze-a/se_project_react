@@ -18,7 +18,7 @@ import { apiKey, locations, defaultClothingItems } from "../../utils/constants";
 import { useAuth } from "../../contexts/AuthContext";
 
 const home = "/se_project_react";
-const { isLoggedIn, setIsLoggedIn } = useAuth();
+
 const lat = locations.Columbus.latitude;
 const long = locations.Columbus.longitude;
 
@@ -30,6 +30,8 @@ const clothes = clothingApi("http://localhost:3001");
 const userData = auth("http://localhost:3001"); 
 
 function App() {
+  const { isLoggedIn, setIsLoggedIn } = useAuth();
+
   const [modalRegisterState, setModalRegisterState] = useState(false);
   const [modalAddItemState, setModalAddItemState] = useState(false);
   const [modalItemState, setModalItemState] = useState(false);

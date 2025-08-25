@@ -10,6 +10,12 @@
   gap: 24px;
 }
 
+.header__right-side {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
 .header__profile {
     display: flex;
     justify-content: space-evenly;
