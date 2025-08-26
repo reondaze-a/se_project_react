@@ -16,6 +16,7 @@ export default function ProtectedRoute({
   }
 
   if (anonymous && isLoggedIn) {
+    
     return <Navigate to={from} />;
   }
 

@@ -3,6 +3,8 @@ import ItemCard from '../../Main/ItemCard/ItemCard';
 import { v4 as uuidv4 } from 'uuid';
 
 export default function ClothesSection({ clothingItems, handleCardClick, openModal }) {
+  
+
   return (
     <section className="clothes-section">
       <div className="clothes-section__header">

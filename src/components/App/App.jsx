@@ -103,6 +103,8 @@ function App() {
     const jwt = localStorage.getItem("jwt");
 
     if (!jwt) {
+      setCurrentUser(null);
+      setLoading(false);  // Ensure loading is set to false if no JWT
       return;
     }
 
@@ -181,6 +183,7 @@ function App() {
         name={modalItem ? modalItem.name : "Loading..."}
         link={modalItem ? modalItem.imageUrl : "Loading..."}
         weather={modalItem ? modalItem.weather : "Loading..."}
+        owner={modalItem ? modalItem.owner : null}
         openDeleteModal={() => {
           setModalDeleteItemState(true);
         }}

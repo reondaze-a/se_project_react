@@ -1,9 +1,19 @@
 import '../ModalWithForm/ModalWithForm.css'
 import './ItemModal.css';
 import closeIcon from '../../assets/close-icon.svg';
+import { useAuth } from '../../contexts/AuthContext';
 
-export default function ItemModal({ isOpen, closeModal, name, link, weather, openDeleteModal }) {
+export default function ItemModal({ isOpen, closeModal, name, link, weather, owner, openDeleteModal }) {
+    const { currentUser, loading } = useAuth();
+
+    if (loading) {
+        return <div style={{opacity: 0}}>Loading...</div>;
+    } // Loading user state
+
+    const isOwner = currentUser?._id === owner;
+
     return (
+
         <div className={`modal ${isOpen ? 'modal_open' : ''}`} onClick={closeModal}>
             <div className="item-modal__container" onClick={(e) => e.stopPropagation()}>
                 <div className="modal__header">
@@ -21,9 +31,9 @@ export default function ItemModal({ isOpen, closeModal, name, link, weather, ope
                         <h2 className="item-modal__title">{name}</h2>
                         <p className="item-modal__desc">Weather: {weather}</p>
                     </div>
-                    <button className="item-modal__delete-button" onClick={openDeleteModal}>
+                    {isOwner && <button className="item-modal__delete-button" onClick={openDeleteModal}>
                         Delete item
-                    </button>
+                    </button>}
                 </div>
             </div>
         </div>
