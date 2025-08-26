@@ -1,14 +1,19 @@
 import { Navigate, useLocation } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function ProtectedRoute({
-  isLoggedIn,
   children,
   anonymous = false,
 }) {
 
+  const { isLoggedIn, loading } = useAuth();
+
   const location = useLocation();
   const from = location.state?.from || "/";
   
+  if (loading) {
+    return <div>Loading...</div>; // Loading state handling to check auth status
+  }
 
   if (anonymous && isLoggedIn) {
     return <Navigate to={from} />;

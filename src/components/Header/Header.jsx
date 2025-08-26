@@ -17,7 +17,7 @@ export default function Header({
   openRegisterModal,
   openLoginModal,
 }) {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, currentUser } = useAuth();
 
   return (
     <header className="header">
@@ -39,11 +39,11 @@ export default function Header({
             >
               + Add clothes
             </button>
-            <div className="header__profile-name">Abraham Efraim</div>
+            <div className="header__profile-name">{currentUser.name}</div>
             <NavLink to={"/profile"} className="header__profile-link">
               <div className="header__profile-avatar-container">
                 <img
-                  src={avatar}
+                  src={currentUser.avatar}
                   alt="profile picture"
                   className="header__profile-avatar"
                 />

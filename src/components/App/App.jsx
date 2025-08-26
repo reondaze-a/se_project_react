@@ -13,6 +13,7 @@ import auth from "../../utils/auth";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
+import ChangeProfileModal from "../ChangeProfileModal/ChangeProfile";
 import { Routes, Route } from "react-router-dom";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { apiKey, locations, defaultClothingItems } from "../../utils/constants";
@@ -32,7 +33,7 @@ const clothes = clothingApi("http://localhost:3001");
 const userData = auth("http://localhost:3001");
 
 function App() {
-  const { isLoggedIn, setIsLoggedIn } = useAuth();
+  const { isLoggedIn, setIsLoggedIn, setCurrentUser, setLoading } = useAuth();
   const navigate = useNavigate();
 
   const [modalRegisterState, setModalRegisterState] = useState(false);
@@ -40,6 +41,7 @@ function App() {
   const [modalAddItemState, setModalAddItemState] = useState(false);
   const [modalItemState, setModalItemState] = useState(false);
   const [modalDeleteItemState, setModalDeleteItemState] = useState(false);
+  const [modalChangeProfileState, setModalChangeProfileState] = useState(false);
   const [weatherData, setWeatherData] = useState(null);
   const [clothingItems, setClothingItems] = useState([]);
   const [modalItem, setModalItem] = useState(null);
@@ -58,37 +60,61 @@ function App() {
       .catch(console.error);
   }, []);
 
-  // Registering function
-  const onRegister = (user) => {
-    return userData
-      .registerUser(user)
-      .then(() => {
-        console.log("Register successful!");
-        setIsLoggedIn(true);
-      })
-      .catch((err) => {
-        throw err; // Throws error for modal to catch
-      });
-  };
-
   const handleToggleSwitchChange = () => {
     currentTemperatureUnit === "F"
       ? setCurrentTemperatureUnit("C")
       : setCurrentTemperatureUnit("F");
   };
 
-  // Login function
-  const onLogin = (user) => {
+  // Registering function
+  const onRegister = (user) => {
     return userData
-      .loginUser(user)
-      .then(() => {
-        console.log("Login successful!");
+      .registerUser(user)
+      .then(({ data }) => {
+        console.log("Register successful!");
         setIsLoggedIn(true);
+        setCurrentUser(data);
       })
       .catch((err) => {
         throw err; // Throws error for modal to catch
       });
   };
+
+  // Login function
+  const onLogin = (user) => {
+    return userData
+      .loginUser(user)
+      .then(({ token }) => {
+        console.log("Login successful!");
+        localStorage.setItem("jwt", token);
+        return userData.getUserData(token);
+      })
+      .then(({ data }) => {
+        setIsLoggedIn(true);
+        setCurrentUser(data);
+      })
+      .catch((err) => {
+        throw err; // Throws error for modal to catch
+      });
+  };
+
+  // Retain login state on refresh
+  useEffect(() => {
+    const jwt = localStorage.getItem("jwt");
+
+    if (!jwt) {
+      return;
+    }
+
+    userData
+      .getUserData(jwt)
+      .then(({ data }) => {
+        setIsLoggedIn(true);
+        setCurrentUser(data);
+      })
+      .catch((console.error))
+      .finally(() => setLoading(false));  // Ensure loading is set to false after the check
+  }, []);
 
   return (
     <CurrentTemperatureUnitContext.Provider
@@ -98,7 +124,6 @@ function App() {
         openAddItemModal={() => setModalAddItemState(true)}
         openRegisterModal={() => setModalRegisterState(true)}
         openLoginModal={() => setModalLoginState(true)}
-        path={home}
       />
 
       <Routes>
@@ -118,14 +143,15 @@ function App() {
         <Route
           path={"/profile"}
           element={
-            <ProtectedRoute isLoggedIn={isLoggedIn}>
+            <ProtectedRoute>
               <Profile
                 clothingItems={clothingItems}
                 handleCardClick={(item) => {
                   setModalItem(item);
                   setModalItemState(true);
                 }}
-                openModal={() => setModalFormState(true)}
+                openModal={() => setModalAddItemState(true)}
+                updateProfile={() => setModalChangeProfileState(true)}
               />
             </ProtectedRoute>
           }
@@ -187,6 +213,21 @@ function App() {
         isOpen={modalLoginState}
         onClose={() => setModalLoginState(false)}
         onLogin={onLogin}
+      />
+      <ChangeProfileModal
+        isOpen={modalChangeProfileState}
+        onClose={() => setModalChangeProfileState(false)}
+        onChangeProfile={(data) => {
+          const token = localStorage.getItem("jwt");
+          return userData
+            .updateUserData(token, data)
+            .then(({ data }) => {
+              setCurrentUser(data);
+            })
+            .catch((err) => {
+              throw err; // Throws error for modal to catch
+            });
+        }}
       />
     </CurrentTemperatureUnitContext.Provider>
   );

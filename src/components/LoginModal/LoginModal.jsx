@@ -24,6 +24,8 @@ export default function LoginModal({ isOpen, onClose, onLogin }) {
     })
       .then(() => {
         onClose();
+        setEmail("");
+        setPassword("");
       })
       .catch((err) => {
         showError(err.message);

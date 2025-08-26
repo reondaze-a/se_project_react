@@ -25,5 +25,29 @@ export default function auth(url) {
       .catch(catchError);
   }
 
-  return { registerUser, loginUser };
+  function getUserData(token) {
+    return fetch(`${url}/users/me`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then(_checkResponse)
+      .catch(catchError);
+  }
+
+  function updateUserData(token, { name, avatar }) {
+    return fetch(`${url}/users/me`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ name, avatar }),
+    })
+      .then(_checkResponse)
+      .catch(catchError);
+  }
+
+  return { registerUser, loginUser, getUserData, updateUserData };
 }
