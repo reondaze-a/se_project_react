@@ -65,10 +65,8 @@ function App() {
       .then(() => {
         console.log("Register successful!");
         setIsLoggedIn(true);
-        navigate("/");
       })
       .catch((err) => {
-        console.log(err);
         throw err; // Throws error for modal to catch
       });
   };
@@ -77,6 +75,19 @@ function App() {
     currentTemperatureUnit === "F"
       ? setCurrentTemperatureUnit("C")
       : setCurrentTemperatureUnit("F");
+  };
+
+  // Login function
+  const onLogin = (user) => {
+    return userData
+      .loginUser(user)
+      .then(() => {
+        console.log("Login successful!");
+        setIsLoggedIn(true);
+      })
+      .catch((err) => {
+        throw err; // Throws error for modal to catch
+      });
   };
 
   return (
@@ -175,7 +186,7 @@ function App() {
       <LoginModal
         isOpen={modalLoginState}
         onClose={() => setModalLoginState(false)}
-        OnLogin={() => {}}
+        onLogin={onLogin}
       />
     </CurrentTemperatureUnitContext.Provider>
   );

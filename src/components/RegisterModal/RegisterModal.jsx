@@ -10,6 +10,14 @@ export default function RegisterModal({ isOpen, onClose, onRegister }) {
   const [avatarLink, setAvatarLink] = useState("");
   const [error, setError] = useState("");
 
+  // Timeout for error message
+  const showError = (message, duration = 5000) => {
+    setError(message);
+    if (duration > 0) {
+      setTimeout(() => setError(""), duration);
+    }
+  };
+
   const handleSubmit = () => {
     setError("");
 
@@ -22,8 +30,8 @@ export default function RegisterModal({ isOpen, onClose, onRegister }) {
       .then(() => {
         onClose();
       })
-      .catch(() => {
-        setError("Registration failed, please try again.");
+      .catch((err) => {
+        showError(err.message);
       });
   };
 

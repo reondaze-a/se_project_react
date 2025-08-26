@@ -7,17 +7,35 @@ export default function LoginModal({ isOpen, onClose, onLogin }) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  // Timeout for error message
+  const showError = (message, duration = 5000) => {
+    setError(message);
+    if (duration > 0) {
+      setTimeout(() => setError(""), duration);
+    }
+  };
+
+  const handleSubmit = () => {
+    setError("");
+
+    onLogin({
+      email,
+      password,
+    })
+      .then(() => {
+        onClose();
+      })
+      .catch((err) => {
+        showError(err.message);
+      });
+  };
+
   return (
     <ModalWithForm
       isOpen={isOpen}
       closeModal={onClose}
-      handleSubmit={() =>
-        onLogin({
-          email: email,
-          password: password,
-        })
-      }
-      title="Sign up"
+      handleSubmit={handleSubmit}
+      title="Login"
     >
       <label htmlFor="email" className="modal__label">
         <span className="modal__label_title">Email</span>
@@ -45,6 +63,14 @@ export default function LoginModal({ isOpen, onClose, onLogin }) {
         />
         <span className="modal__error-text"></span>
       </label>
+
+      {/*Error message in case login fails*/}
+      {error && (
+        <span className="modal__error-text modal__error-text_active">
+          {error}
+        </span>
+      )}
+
       <button
         type="submit"
         className="modal__submit-button"
