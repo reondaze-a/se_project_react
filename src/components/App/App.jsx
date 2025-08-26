@@ -54,7 +54,7 @@ function App() {
   useEffect(() => {
     clothes
       .fetchClothingItems()
-      .then((data) => {
+      .then(({ data }) => {
         setClothingItems(data.sort((a, b) => b.createdAt - a.createdAt));
       })
       .catch(console.error);

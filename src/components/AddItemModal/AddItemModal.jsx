@@ -21,11 +21,9 @@ export default function AddItemModal({ isOpen, onClose, onAddItem }) {
       closeModal={onClose}
       handleSubmit={() =>
         onAddItem({
-          _id: uuidv4(),
           name: itemName,
           imageUrl: itemLink,
           weather: itemWeather,
-          createdAt: Date.now(),
         })
       }
       title="New garment"

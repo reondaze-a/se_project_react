@@ -4,7 +4,7 @@ import { useAuth } from "../../../contexts/AuthContext";
 
 const avatar = new URL(avatarLink, import.meta.url).href;
 
-export default function SideBar({ updateProfile}) {
+export default function SideBar({ updateProfile }) {
   const { currentUser, setIsLoggedIn } = useAuth();
 
   const logOut = () => {

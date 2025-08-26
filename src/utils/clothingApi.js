@@ -10,6 +10,7 @@ export default function clothingApi(url) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
       },
       body: JSON.stringify(item),
     }).then(_checkResponse);
@@ -20,6 +21,7 @@ export default function clothingApi(url) {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
       },
       body: JSON.stringify({ _id: id }),
     }).then(_checkResponse);
