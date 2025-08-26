@@ -29,11 +29,11 @@ const long = locations.Columbus.longitude;
 const weather = weatherApi(
   `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=${apiKey}`
 );
-const clothes = clothingApi("http://localhost:3001");
-const userData = auth("http://localhost:3001");
+const clothes = clothingApi("https://pq9yfz-3001.csb.app");
+const userData = auth("https://pq9yfz-3001.csb.app");
 
 function App() {
-  const { isLoggedIn, setIsLoggedIn, setCurrentUser, setLoading } = useAuth();
+  const { setIsLoggedIn, setCurrentUser, setLoading } = useAuth();
   const navigate = useNavigate();
 
   const [modalRegisterState, setModalRegisterState] = useState(false);
@@ -55,7 +55,7 @@ function App() {
     clothes
       .fetchClothingItems()
       .then(({ data }) => {
-        setClothingItems(data.sort((a, b) => b.createdAt - a.createdAt));
+        setClothingItems(data);
       })
       .catch(console.error);
   }, []);
@@ -104,7 +104,7 @@ function App() {
 
     if (!jwt) {
       setCurrentUser(null);
-      setLoading(false);  // Ensure loading is set to false if no JWT
+      setLoading(false); // Ensure loading is set to false if no JWT
       return;
     }
 
@@ -114,8 +114,8 @@ function App() {
         setIsLoggedIn(true);
         setCurrentUser(data);
       })
-      .catch((console.error))
-      .finally(() => setLoading(false));  // Ensure loading is set to false after the check
+      .catch(console.error)
+      .finally(() => setLoading(false)); // Ensure loading is set to false after the check
   }, []);
 
   return (
@@ -161,7 +161,7 @@ function App() {
       </Routes>
 
       <Footer />
-      {/* <ModalWithForm isOpen={modalFormState} closeModal={() => setModalFormState(false)}/> */}
+
       <AddItemModal
         isOpen={modalAddItemState}
         onClose={() => setModalAddItemState(false)}
