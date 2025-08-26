@@ -12,7 +12,7 @@ export function AuthProvider({ children }) {
   );
 }
 
-// Custom hook 
+// Custom hook
 export function useAuth() {
   return useContext(AuthContext);
 }

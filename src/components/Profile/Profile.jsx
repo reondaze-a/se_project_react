@@ -1,14 +1,16 @@
-import './Profile.css';
-import Sidebar from './SideBar/Sidebar';
-import ClothesSection from './ClothesSection/ClothesSection';
-
-
+import "./Profile.css";
+import SideBar from "./SideBar/SideBar";
+import ClothesSection from "./ClothesSection/ClothesSection";
 
 export default function Profile({ clothingItems, handleCardClick, openModal }) {
   return (
     <section className="profile">
-      <Sidebar />
-      <ClothesSection clothingItems={clothingItems} handleCardClick={handleCardClick} openModal={openModal}/>
+      <SideBar />
+      <ClothesSection
+        clothingItems={clothingItems}
+        handleCardClick={handleCardClick}
+        openModal={openModal}
+      />
     </section>
   );
 }

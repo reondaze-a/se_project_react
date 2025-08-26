@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./App.css";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import Header from "../Header/Header";
@@ -23,15 +24,16 @@ const home = "/se_project_react";
 const lat = locations.Columbus.latitude;
 const long = locations.Columbus.longitude;
 
-// API calls with uniform 
+// API calls with uniform
 const weather = weatherApi(
   `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=${apiKey}`
 );
-const clothes = clothingApi("http://localhost:3001"); 
-const userData = auth("http://localhost:3001"); 
+const clothes = clothingApi("http://localhost:3001");
+const userData = auth("http://localhost:3001");
 
 function App() {
   const { isLoggedIn, setIsLoggedIn } = useAuth();
+  const navigate = useNavigate();
 
   const [modalRegisterState, setModalRegisterState] = useState(false);
   const [modalLoginState, setModalLoginState] = useState(false);
@@ -56,6 +58,21 @@ function App() {
       .catch(console.error);
   }, []);
 
+  // Registering function
+  const onRegister = (user) => {
+    return userData
+      .registerUser(user)
+      .then(() => {
+        console.log("Register successful!");
+        setIsLoggedIn(true);
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+        throw err; // Throws error for modal to catch
+      });
+  };
+
   const handleToggleSwitchChange = () => {
     currentTemperatureUnit === "F"
       ? setCurrentTemperatureUnit("C")
@@ -66,11 +83,11 @@ function App() {
     <CurrentTemperatureUnitContext.Provider
       value={{ currentTemperatureUnit, handleToggleSwitchChange }}
     >
-      <Header 
-        openAddItemModal={() => setModalAddItemState(true)} 
+      <Header
+        openAddItemModal={() => setModalAddItemState(true)}
         openRegisterModal={() => setModalRegisterState(true)}
         openLoginModal={() => setModalLoginState(true)}
-        path={home} 
+        path={home}
       />
 
       <Routes>
@@ -153,7 +170,7 @@ function App() {
       <RegisterModal
         isOpen={modalRegisterState}
         onClose={() => setModalRegisterState(false)}
-        onRegister={() => {}}
+        onRegister={onRegister}
       />
       <LoginModal
         isOpen={modalLoginState}
