@@ -1,8 +1,5 @@
 import "./Sidebar.css";
-import avatarLink from "../../../assets/avatarpicture.avif";
 import { useAuth } from "../../../contexts/AuthContext";
-
-const avatar = new URL(avatarLink, import.meta.url).href;
 
 export default function SideBar({ updateProfile, logOutModal }) {
   const { currentUser } = useAuth();

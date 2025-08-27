@@ -1,0 +1,16 @@
+.register-button__container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.register__text {
+  margin: 0;
+}
+
+.register__redirect {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}

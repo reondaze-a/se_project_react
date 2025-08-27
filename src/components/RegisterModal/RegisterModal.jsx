@@ -108,13 +108,19 @@ export default function RegisterModal({ isOpen, onClose, onRegister }) {
         </span>
       )}
 
-      <button
-        type="submit"
-        className="modal__submit-button"
-        // disabled
-      >
-        Next
-      </button>
+      <div className="register-button__container">
+        <button
+          type="submit"
+          className="modal__submit-button"
+          // disabled
+        >
+          Next
+        </button>
+        <p className="register__text">or</p>
+        <button type="button" className="register__redirect">
+          Log in
+        </button>
+      </div>
     </ModalWithForm>
   );
 }
