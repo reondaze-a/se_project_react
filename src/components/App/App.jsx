@@ -18,6 +18,7 @@ import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperature
 import { apiKey, locations, defaultClothingItems } from "../../utils/constants";
 import { useAuth } from "../../contexts/AuthContext";
 import LoginModal from "../LoginModal/LoginModal";
+import LogoutModal from "../LogoutModal/LogoutModal";
 
 const lat = locations.Columbus.latitude;
 const long = locations.Columbus.longitude;
@@ -34,6 +35,7 @@ function App() {
 
   const [modalRegisterState, setModalRegisterState] = useState(false);
   const [modalLoginState, setModalLoginState] = useState(false);
+  const [modalLogoutState, setModalLogoutState] = useState(false);
   const [modalAddItemState, setModalAddItemState] = useState(false);
   const [modalItemState, setModalItemState] = useState(false);
   const [modalDeleteItemState, setModalDeleteItemState] = useState(false);
@@ -150,6 +152,7 @@ function App() {
                 }}
                 openModal={() => setModalAddItemState(true)}
                 updateProfile={() => setModalChangeProfileState(true)}
+                logOutModal={() => setModalLogoutState(true)}
               />
             </ProtectedRoute>
           }
@@ -212,6 +215,10 @@ function App() {
         isOpen={modalLoginState}
         onClose={() => setModalLoginState(false)}
         onLogin={onLogin}
+      />
+      <LogoutModal
+        isOpen={modalLogoutState}
+        closeModal={() => setModalLogoutState(false)}
       />
       <ChangeProfileModal
         isOpen={modalChangeProfileState}

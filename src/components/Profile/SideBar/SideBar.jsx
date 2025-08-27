@@ -4,14 +4,8 @@ import { useAuth } from "../../../contexts/AuthContext";
 
 const avatar = new URL(avatarLink, import.meta.url).href;
 
-export default function SideBar({ updateProfile }) {
-  const { currentUser, setCurrentUser, setIsLoggedIn } = useAuth();
-
-  const logOut = () => {
-    setIsLoggedIn(false);
-    setCurrentUser(null);
-    localStorage.removeItem("jwt");
-  };
+export default function SideBar({ updateProfile, logOutModal }) {
+  const { currentUser } = useAuth();
 
   return (
     <div className="sidebar">
@@ -33,7 +27,7 @@ export default function SideBar({ updateProfile }) {
         >
           Change profile data
         </button>
-        <button type="button" className="sidebar__button" onClick={logOut}>
+        <button type="button" className="sidebar__button" onClick={logOutModal}>
           Log out
         </button>
       </div>
