@@ -3,6 +3,11 @@ import { v4 as uuidv4 } from "uuid";
 import { useState, useEffect } from "react";
 
 export default function AddItemModal({ isOpen, onClose, onAddItem }) {
+  const [form, setForm] = useState({
+    itemName: "",
+    itemLink: "",
+    itemWeather: "hot"
+  });
   const [itemName, setItemName] = useState("");
   const [itemLink, setItemLink] = useState("");
   const [itemWeather, setItemWeather] = useState("hot");
@@ -31,7 +36,7 @@ export default function AddItemModal({ isOpen, onClose, onAddItem }) {
       <label htmlFor="garment-name" className="modal__label">
         <span className="modal__label_title">Name</span>
         <input
-          id="garment-name"
+          name="garment-name"
           type="text"
           className="modal__input"
           placeholder="Name"
@@ -44,7 +49,7 @@ export default function AddItemModal({ isOpen, onClose, onAddItem }) {
       <label htmlFor="garment-url" className="modal__label">
         <span className="modal__label_title">Image</span>
         <input
-          id="garment-url"
+          name="garment-url"
           type="url"
           className="modal__input"
           placeholder="Image URL"

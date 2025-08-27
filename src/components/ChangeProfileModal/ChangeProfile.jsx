@@ -3,8 +3,10 @@ import { useState } from "react";
 import "../ModalWithForm/ModalWithForm.css";
 
 export default function ChangeProfileModal({ isOpen, onClose, onChangeProfile }) {
-  const [name, setName] = useState("");
-  const [avatar, setAvatar] = useState("");
+  const [form, setForm] = useState({
+    name: "",
+    avatar: "",
+  });
   const [error, setError] = useState("");
 
   // Timeout for error message
@@ -15,12 +17,23 @@ export default function ChangeProfileModal({ isOpen, onClose, onChangeProfile })
     }
   };
 
+  // Handles input changes
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  // check if any required field is empty
+  const isFormComplete = Object.values(form).every((val) => val.trim() !== "");
+
   const handleSubmit = () => {
     setError("");
 
     onChangeProfile({
-      name,
-      avatar,
+      name: form.name,
+      avatar: form.avatar,
     })
       .then(() => {
         onClose();
@@ -42,26 +55,26 @@ export default function ChangeProfileModal({ isOpen, onClose, onChangeProfile })
       <label htmlFor="name" className="modal__label">
         <span className="modal__label_title">Name*</span>
         <input
-          id="name"
-          type="name"
+          type="text"
+          name="name"
           className="modal__input"
           placeholder="Name"
           required
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={form.name}
+          onChange={handleChange}
         />
         <span className="modal__error-text"></span>
       </label>
-      <label htmlFor="avatar-url" className="modal__label">
-        <span className="modal__label_title">Avatar</span>
+      <label htmlFor="avatar" className="modal__label">
+        <span className="modal__label_title">Avatar*</span>
         <input
-          id="avatar-url"
           type="url"
+          name="avatar"
           className="modal__input"
           placeholder="Avatar URL"
           required
-          value={avatar}
-          onChange={(e) => setAvatar(e.target.value)}
+          value={form.avatar}
+          onChange={handleChange}
         />
         <span className="modal__error-text"></span>
       </label>
@@ -75,7 +88,7 @@ export default function ChangeProfileModal({ isOpen, onClose, onChangeProfile })
 
       <button
         type="submit"
-        className="modal__submit-button"
+        className={`modal__submit-button ${isFormComplete ? "" : "modal__submit-button_disabled"}`}
         // disabled
       >
         Save changes

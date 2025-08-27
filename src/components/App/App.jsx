@@ -15,7 +15,7 @@ import RegisterModal from "../RegisterModal/RegisterModal";
 import ChangeProfileModal from "../ChangeProfileModal/ChangeProfile";
 import { Routes, Route } from "react-router-dom";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
-import { apiKey, locations, defaultClothingItems } from "../../utils/constants";
+import { apiKey, locations } from "../../utils/constants";
 import { useAuth } from "../../contexts/AuthContext";
 import LoginModal from "../LoginModal/LoginModal";
 import LogoutModal from "../LogoutModal/LogoutModal";
@@ -23,12 +23,14 @@ import LogoutModal from "../LogoutModal/LogoutModal";
 const lat = locations.Columbus.latitude;
 const long = locations.Columbus.longitude;
 
+const dbUrl = "http://localhost:3001"; // Local backend (or codesandbox url)
+
 // API calls with uniform
 const weather = weatherApi(
   `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=${apiKey}`
 );
-const clothes = clothingApi("https://pq9yfz-3001.csb.app");
-const userData = auth("https://pq9yfz-3001.csb.app");
+const clothes = clothingApi(dbUrl);
+const userData = auth(dbUrl);
 
 function App() {
   const { setIsLoggedIn, setCurrentUser, setLoading } = useAuth();
