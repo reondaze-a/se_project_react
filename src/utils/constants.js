@@ -225,6 +225,10 @@ const catchError = (err) => {
   throw err;
 };
 
+const isFormComplete = (form) => {
+  return Object.values(form).every((val) => val.trim() !== "");
+};
+
 export {
   apiKey,
   defaultClothingItems,
@@ -233,4 +237,5 @@ export {
   temperatureSwitch,
   _checkResponse,
   catchError,
+  isFormComplete,
 };

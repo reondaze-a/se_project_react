@@ -1,12 +1,31 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../ModalWithForm/ModalWithForm.css";
+import { useAuth } from "../../contexts/AuthContext";
+import { isFormComplete } from "../../utils/constants";
 
-export default function ChangeProfileModal({ isOpen, onClose, onChangeProfile }) {
+export default function ChangeProfileModal({
+  isOpen,
+  onClose,
+  onChangeProfile,
+}) {
+  const { currentUser, loading } = useAuth();
+
   const [form, setForm] = useState({
     name: "",
     avatar: "",
   });
+
+  // Rendering of name and avatar link values on open
+  useEffect(() => {
+    if (currentUser) {
+      setForm({
+        name: currentUser.name || "",
+        avatar: currentUser.avatar || "",
+      });
+    }
+  }, [isOpen]); // Reverts back to original values on opening the modal
+
   const [error, setError] = useState("");
 
   // Timeout for error message
@@ -19,31 +38,40 @@ export default function ChangeProfileModal({ isOpen, onClose, onChangeProfile })
 
   // Handles input changes
   const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   // check if any required field is empty
-  const isFormComplete = Object.values(form).every((val) => val.trim() !== "");
+  const checkForm = isFormComplete(form);
 
+  // Submit logic
   const handleSubmit = () => {
+    const { name, avatar } = form;
     setError("");
 
     onChangeProfile({
-      name: form.name,
-      avatar: form.avatar,
+      name,
+      avatar,
     })
       .then(() => {
         onClose();
-        setName("");
-        setAvatar("");
+        setForm({
+          name,
+          avatar,
+        });
       })
       .catch((err) => {
         showError(err.message);
       });
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <ModalWithForm
@@ -66,13 +94,12 @@ export default function ChangeProfileModal({ isOpen, onClose, onChangeProfile })
         <span className="modal__error-text"></span>
       </label>
       <label htmlFor="avatar" className="modal__label">
-        <span className="modal__label_title">Avatar*</span>
+        <span className="modal__label_title">Avatar</span>
         <input
           type="url"
           name="avatar"
           className="modal__input"
           placeholder="Avatar URL"
-          required
           value={form.avatar}
           onChange={handleChange}
         />
@@ -88,7 +115,9 @@ export default function ChangeProfileModal({ isOpen, onClose, onChangeProfile })
 
       <button
         type="submit"
-        className={`modal__submit-button ${isFormComplete ? "" : "modal__submit-button_disabled"}`}
+        className={`modal__submit-button ${
+          checkForm ? "" : "modal__submit-button_disabled"
+        }`}
         // disabled
       >
         Save changes

@@ -30,6 +30,7 @@ export default function ClothesSection({
           <ItemCard
             name={item.name}
             link={item.imageUrl}
+            key={item._id}
             isOpen={() => {
               handleCardClick(item);
             }}

@@ -23,7 +23,7 @@ import LogoutModal from "../LogoutModal/LogoutModal";
 const lat = locations.Columbus.latitude;
 const long = locations.Columbus.longitude;
 
-const dbUrl = "http://localhost:3001"; // Local backend (or codesandbox url)
+const dbUrl = "https://pq9yfz-3001.csb.app"; // Local backend (or codesandbox url)
 
 // API calls with uniform
 const weather = weatherApi(

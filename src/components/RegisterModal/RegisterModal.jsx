@@ -2,12 +2,24 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useState } from "react";
 import "./RegisterModal.css";
 import "../ModalWithForm/ModalWithForm.css";
+import { isFormComplete } from "../../utils/constants";
 
 export default function RegisterModal({ isOpen, onClose, onRegister }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [avatarLink, setAvatarLink] = useState("");
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+    name: "",
+    avatar: "",
+  });
+
+  // Clear form state
+  const initialState = {
+    email: "",
+    password: "",
+    name: "",
+    avatar: "",
+  };
+
   const [error, setError] = useState("");
 
   // Timeout for error message
@@ -18,21 +30,31 @@ export default function RegisterModal({ isOpen, onClose, onRegister }) {
     }
   };
 
-  const handleSubmit = () => {
-    setError("");
+  // Handles input changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
+  // check for input
+  const checkForm = isFormComplete(form);
+
+  const handleSubmit = () => {
+    const { name, email, avatar, password } = form;
+
+    setError("");
     onRegister({
       name,
       email,
-      avatar: avatarLink,
+      avatar,
       password,
     })
       .then(() => {
         onClose();
-        setAvatarLink("");
-        setName("");
-        setEmail("");
-        setPassword("");
+        setForm(initialState);
       })
       .catch((err) => {
         showError(err.message);
@@ -49,54 +71,54 @@ export default function RegisterModal({ isOpen, onClose, onRegister }) {
       <label htmlFor="email" className="modal__label">
         <span className="modal__label_title">Email*</span>
         <input
-          id="email"
           type="email"
+          name="email"
           className="modal__input"
           placeholder="Email"
           required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={form.email}
+          onChange={handleChange}
         />
         <span className="modal__error-text"></span>
       </label>
       <label htmlFor="password" className="modal__label">
         <span className="modal__label_title">Password*</span>
         <input
-          id="password"
+          name="password"
           type="password"
           className="modal__input"
           placeholder="Password"
           required
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={form.password}
+          onChange={handleChange}
         />
         <span className="modal__error-text"></span>
       </label>
       <label htmlFor="name" className="modal__label">
-        <span className="modal__label_title">Name</span>
+        <span className="modal__label_title">Name*</span>
         <input
-          id="name"
+          name="name"
           type="text"
           className="modal__input"
           placeholder="Name"
           required
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={form.name}
+          onChange={handleChange}
         />
         <span className="modal__error-text"></span>
       </label>
-      <label htmlFor="avatar-url" className="modal__label">
-        <span className="modal__label_title">Avatar URL</span>
+      <label htmlFor="avatar" className="modal__label">
+        <span className="modal__label_title">Avatar*</span>
         <input
-          id="avatar-url"
+          name="avatar"
           type="url"
           className="modal__input"
           placeholder="Avatar URL"
           minLength="2"
           maxLength="120"
           required
-          value={avatarLink}
-          onChange={(e) => setAvatarLink(e.target.value)}
+          value={form.avatar}
+          onChange={handleChange}
         />
         <span className="modal__error-text"></span>
       </label>
@@ -111,7 +133,9 @@ export default function RegisterModal({ isOpen, onClose, onRegister }) {
       <div className="register-button__container">
         <button
           type="submit"
-          className="modal__submit-button"
+          className={`modal__submit-button ${
+            checkForm ? "" : "modal__submit-button_disabled"
+          }`}
           // disabled
         >
           Next

@@ -1,14 +1,21 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useState } from "react";
 import "../ModalWithForm/ModalWithForm.css";
+import { isFormComplete } from "../../utils/constants";
 
 export default function LoginModal({ isOpen, onClose, onLogin }) {
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
+
   const [error, setError] = useState("");
 
+  // clear form state
+  const initialState = {
+    email: "",
+    password: "",
+  };
 
   // Timeout for error message
   const showError = (message, duration = 5000) => {
@@ -20,26 +27,28 @@ export default function LoginModal({ isOpen, onClose, onLogin }) {
 
   // Handles input changes
   const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   // check if any required field is empty
-  const isFormComplete = Object.values(form).every((val) => val.trim() !== "");
+  const checkForm = isFormComplete(form);
 
   const handleSubmit = () => {
+    const { email, password } = form;
+
     setError("");
 
     onLogin({
-      email: form.email,
-      password: form.password,
+      email,
+      password,
     })
       .then(() => {
         onClose();
-        setEmail("");
-        setPassword("");
+        setForm(initialState);
       })
       .catch((err) => {
         showError(err.message);
@@ -89,7 +98,9 @@ export default function LoginModal({ isOpen, onClose, onLogin }) {
 
       <button
         type="submit"
-        className={`modal__submit-button ${isFormComplete ? "" : "modal__submit-button_disabled"}`}
+        className={`modal__submit-button ${
+          checkForm ? "" : "modal__submit-button_disabled"
+        }`}
         // disabled
       >
         Log in
