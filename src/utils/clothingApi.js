@@ -27,5 +27,29 @@ export default function clothingApi(url) {
     }).then(_checkResponse);
   }
 
-  return { fetchClothingItems, addClothingItem, deleteClothingItem };
+  function like(id) {
+    return fetch(`${url}/items/${id}/likes`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    }).then(_checkResponse);
+  }
+
+  function dislike(id) {
+    return fetch(`${url}/items/${id}/likes`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    }).then(_checkResponse);
+  }
+
+  return {
+    fetchClothingItems,
+    addClothingItem,
+    deleteClothingItem,
+    like,
+    dislike,
+  };
 }

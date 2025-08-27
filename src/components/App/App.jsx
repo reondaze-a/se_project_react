@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "./App.css";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import Header from "../Header/Header";
@@ -20,8 +19,6 @@ import { apiKey, locations, defaultClothingItems } from "../../utils/constants";
 import { useAuth } from "../../contexts/AuthContext";
 import LoginModal from "../LoginModal/LoginModal";
 
-const home = "/se_project_react";
-
 const lat = locations.Columbus.latitude;
 const long = locations.Columbus.longitude;
 
@@ -34,7 +31,6 @@ const userData = auth("https://pq9yfz-3001.csb.app");
 
 function App() {
   const { setIsLoggedIn, setCurrentUser, setLoading } = useAuth();
-  const navigate = useNavigate();
 
   const [modalRegisterState, setModalRegisterState] = useState(false);
   const [modalLoginState, setModalLoginState] = useState(false);
