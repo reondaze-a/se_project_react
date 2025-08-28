@@ -8,6 +8,7 @@ export default function Profile({
   openModal,
   updateProfile,
   logOutModal,
+  toggleLike
 }) {
   return (
     <section className="profile">
@@ -16,6 +17,7 @@ export default function Profile({
         clothingItems={clothingItems}
         handleCardClick={handleCardClick}
         openModal={openModal}
+        toggleLike={toggleLike}
       />
     </section>
   );

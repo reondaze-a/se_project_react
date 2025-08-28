@@ -1,9 +1,16 @@
-import { useState } from "react";
 import { useAuth } from "../../../contexts/AuthContext";
+import { useState } from "react";
 
-export default function ItemCard({ name, link, isOpen, key }) {
-  const [isLiked, setIsLiked] = useState(false);
+export default function ItemCard({ name, link, isOpen, id, toggleLike, likes }) {
   const { currentUser } = useAuth();
+  const [isLiked, setIsliked] = useState(likes.includes(currentUser?._id))
+
+  const handleLike = () => {
+    if(!currentUser) return; // disables fetch call on non-loggedin users
+    setIsliked(!isLiked);
+    toggleLike(id, isLiked).catch(() => setIsliked(isLiked)); // Reverts back if fetch fails
+  }
+ 
 
   const heartOutline = (
     <svg
@@ -42,7 +49,7 @@ export default function ItemCard({ name, link, isOpen, key }) {
         <h2 className="item-card__header">{name}</h2>
         <button
           className="item-card__like-button"
-          onClick={() => setIsLiked(!isLiked)}
+          onClick={handleLike}
         >
           {isLiked ? heartFilled : heartOutline}
         </button>

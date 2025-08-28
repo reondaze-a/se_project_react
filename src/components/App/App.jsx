@@ -23,7 +23,7 @@ import LogoutModal from "../LogoutModal/LogoutModal";
 const lat = locations.Columbus.latitude;
 const long = locations.Columbus.longitude;
 
-const dbUrl = "http://localhost:3001"; // Local backend (or codesandbox url)
+const dbUrl = "https://pq9yfz-3001.csb.app"; // Local backend (or codesandbox url)
 
 // API calls with uniform
 const weather = weatherApi(
@@ -98,10 +98,25 @@ function App() {
       });
   };
 
+  // Toggles between sign up and login
   const onSwitch = () => {
     setModalLoginState(!modalLoginState);
     setModalRegisterState(!modalRegisterState);
   };
+
+  //toggling like function
+  const toggleLike = (id, isLiked) => {
+    const apiCall = isLiked ? clothes.dislike : clothes.like;
+
+    return apiCall(id)
+      .then(({ data: updatedItem }) => {
+        setClothingItems((currentItems) => currentItems.map((currentItem) => currentItem._id === updatedItem._id ? updatedItem : currentItem))
+        return updatedItem;  // passes updated item to chain the promise
+      })
+      .catch((err) => {
+        throw err;
+      }); // throws error for the chain to catch
+  }
 
   // Retain login state on refresh
   useEffect(() => {
@@ -144,6 +159,7 @@ function App() {
                 setModalItem(item);
                 setModalItemState(true);
               }}
+              toggleLike={toggleLike}
             />
           }
         />
@@ -160,6 +176,7 @@ function App() {
                 openModal={() => setModalAddItemState(true)}
                 updateProfile={() => setModalChangeProfileState(true)}
                 logOutModal={() => setModalLogoutState(true)}
+                toggleLike={toggleLike}
               />
             </ProtectedRoute>
           }
@@ -174,8 +191,8 @@ function App() {
         onAddItem={(item) => {
           clothes
             .addClothingItem(item)
-            .then(() => {
-              setClothingItems([item, ...clothingItems]);
+            .then(({ data: addedItem }) => {
+              setClothingItems([addedItem, ...clothingItems]);
               setModalAddItemState(false);
             })
             .catch((err) => {

@@ -7,7 +7,7 @@ import { CurrentTemperatureUnitContext } from '../../contexts/CurrentTemperature
 import { useState, useContext } from 'react';
 
 
-export default function Main({ weatherData, handleCardClick, clothingItems }) {
+export default function Main({ weatherData, handleCardClick, clothingItems, toggleLike }) {
 
     const tempData = useContext(CurrentTemperatureUnitContext);
     const defaultTemp = weatherData ? Math.round(weatherData.main.temp) : null;
@@ -41,12 +41,14 @@ export default function Main({ weatherData, handleCardClick, clothingItems }) {
                     return (
                         <ItemCard
                             key={item._id}
+                            id={item._id} // prop for id
                             name={item.name}
                             link={item.imageUrl}
                             likes={item.likes}
                             isOpen={() => {
                                 handleCardClick(item);
                             }}
+                            toggleLike={toggleLike}
                         />
                     )
                 })}

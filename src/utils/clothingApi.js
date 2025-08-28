@@ -27,7 +27,7 @@ export default function clothingApi(url) {
     }).then(_checkResponse);
   }
 
-  function like(iitemId) {
+  function like(id) {
     return fetch(`${url}/items/${id}/likes`, {
       method: "PUT",
       headers: {
@@ -36,7 +36,7 @@ export default function clothingApi(url) {
     }).then(_checkResponse);
   }
 
-  function dislike(itemId) {
+  function dislike(id) {
     return fetch(`${url}/items/${id}/likes`, {
       method: "DELETE",
       headers: {

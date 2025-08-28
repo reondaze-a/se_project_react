@@ -6,6 +6,7 @@ export default function ClothesSection({
   clothingItems,
   handleCardClick,
   openModal,
+  toggleLike
 }) {
   const { currentUser, loading } = useAuth();
 
@@ -31,9 +32,12 @@ export default function ClothesSection({
             name={item.name}
             link={item.imageUrl}
             key={item._id}
+            id={item._id} // prop for id
+            likes={item.likes}
             isOpen={() => {
               handleCardClick(item);
             }}
+            toggleLike={toggleLike}
           />
         ))}
       </div>
