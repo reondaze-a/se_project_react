@@ -1,22 +1,34 @@
 import headerLogo from "../../assets/Logo.svg";
-import avatarLink from "../../assets/avatarpicture.avif";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { NavLink } from "react-router-dom";
 import "./Header.css";
 import { useAuth } from "../../contexts/AuthContext";
-
-const avatar = new URL(avatarLink, import.meta.url).href;
+import { useState } from "react";
 
 const currentDate = new Date().toLocaleString("default", {
   month: "long",
   day: "numeric",
 });
 
+const fallbackStyle = {
+  width: "50px",
+  height: "50px",
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  fontWeight: "bold",
+  fontSize: "20px",
+  color: "#fff",
+  backgroundColor: "#0098ffb8",
+  transform: "translateY(2%)",
+};
+
 export default function Header({
   openAddItemModal,
   openRegisterModal,
   openLoginModal,
 }) {
+  const [imgError, setImgError] = useState(false);
   const { isLoggedIn, currentUser } = useAuth();
 
   return (
@@ -40,13 +52,24 @@ export default function Header({
               + Add clothes
             </button>
             <div className="header__profile-name">{currentUser.name}</div>
-            <NavLink to={"/profile"} className="header__profile-link">
+            <NavLink
+              to={"/profile"}
+              className="header__profile-link"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
               <div className="header__profile-avatar-container">
-                <img
-                  src={currentUser.avatar}
-                  alt="profile picture"
-                  className="header__profile-avatar"
-                />
+                {imgError ? (
+                  <div style={fallbackStyle}>
+                    {currentUser.name[0].toUpperCase()}
+                  </div>
+                ) : (
+                  <img
+                    src={currentUser.avatar}
+                    alt="profile picture"
+                    className="header__profile-avatar"
+                    onError={() => setImgError(true)}
+                  />
+                )}
               </div>
             </NavLink>
           </div>

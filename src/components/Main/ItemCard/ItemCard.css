@@ -34,15 +34,34 @@
   position: absolute;
   top: 16px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-40%);
   display: flex;
+  align-items: center;
+}
+
+.item-card__like-button {
+  border: none;
+  background: none;
+  padding: 0;
+  padding-left: 4px;
+  transform: translateY(5%);
+  cursor: pointer;
 }
 
 .item-card__icon {
   width: 20px;
   height: 20px;
   color: #999;
-  transition: color 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.item-card__icon:hover {
+  color: #e0245e;
+  transform: scale(1.05);
+}
+
+.item-card__icon:active {
+  transform: scale(0.95);
 }
 
 .item-card__image {
