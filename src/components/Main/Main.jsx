@@ -43,7 +43,7 @@ export default function Main({ weatherData, handleCardClick, clothingItems }) {
                             key={item._id}
                             name={item.name}
                             link={item.imageUrl}
-
+                            likes={item.likes}
                             isOpen={() => {
                                 handleCardClick(item);
                             }}

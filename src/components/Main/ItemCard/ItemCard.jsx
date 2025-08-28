@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useAuth } from "../../../contexts/AuthContext";
 
-export default function ItemCard({ name, link, isOpen }) {
+export default function ItemCard({ name, link, isOpen, key }) {
   const [isLiked, setIsLiked] = useState(false);
+  const { currentUser } = useAuth();
 
   const heartOutline = (
     <svg
