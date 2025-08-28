@@ -3,7 +3,7 @@ import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { NavLink } from "react-router-dom";
 import "./Header.css";
 import { useAuth } from "../../contexts/AuthContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { fallbackStyle } from "../../utils/constants";
 
 const currentDate = new Date().toLocaleString("default", {
@@ -18,6 +18,10 @@ export default function Header({
 }) {
   const [imgError, setImgError] = useState(false);
   const { isLoggedIn, currentUser } = useAuth();
+
+  useEffect(() => {
+    setImgError(false);
+  }, [currentUser?.avatar]); // Reset imgError when avatar URL changes
 
   return (
     <header className="header">

@@ -3,7 +3,7 @@ import { useState } from "react";
 import "../ModalWithForm/ModalWithForm.css";
 import { isFormComplete } from "../../utils/constants";
 
-export default function LoginModal({ isOpen, onClose, onLogin }) {
+export default function LoginModal({ isOpen, onClose, onLogin, onSwitch }) {
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -96,15 +96,20 @@ export default function LoginModal({ isOpen, onClose, onLogin }) {
         </span>
       )}
 
-      <button
-        type="submit"
-        className={`modal__submit-button ${
-          checkForm ? "" : "modal__submit-button_disabled"
-        }`}
-        // disabled
-      >
-        Log in
-      </button>
+      <div className="register-button__container">
+        <button
+          type="submit"
+          className={`modal__submit-button ${
+            checkForm ? "" : "modal__submit-button_disabled"
+          }`}
+          // disabled
+        >
+          Log in
+        </button>
+        <button type="button" className="register__login" onClick={onSwitch}>
+          or Sign up
+        </button>
+      </div>
     </ModalWithForm>
   );
 }

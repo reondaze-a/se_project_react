@@ -1,11 +1,15 @@
 import "./Sidebar.css";
 import { useAuth } from "../../../contexts/AuthContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { fallbackStyle } from "../../../utils/constants";
 
 export default function SideBar({ updateProfile, logOutModal }) {
   const { currentUser } = useAuth();
   const [imgError, setImgError] = useState(false);
+
+  useEffect(() => {
+    setImgError(false);
+  }, [currentUser?.avatar]); // Reset imgError when avatar URL changes
 
   return (
     <div className="sidebar">

@@ -4,7 +4,7 @@ import "./RegisterModal.css";
 import "../ModalWithForm/ModalWithForm.css";
 import { isFormComplete } from "../../utils/constants";
 
-export default function RegisterModal({ isOpen, onClose, onRegister }) {
+export default function RegisterModal({ isOpen, onClose, onRegister, onSwitch }) {
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -140,9 +140,8 @@ export default function RegisterModal({ isOpen, onClose, onRegister }) {
         >
           Next
         </button>
-        <p className="register__text">or</p>
-        <button type="button" className="register__redirect">
-          Log in
+        <button type="button" className="register__login" onClick={onSwitch}>
+          or Log in
         </button>
       </div>
     </ModalWithForm>

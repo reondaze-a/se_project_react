@@ -23,7 +23,7 @@ import LogoutModal from "../LogoutModal/LogoutModal";
 const lat = locations.Columbus.latitude;
 const long = locations.Columbus.longitude;
 
-const dbUrl = "https://pq9yfz-3001.csb.app"; // Local backend (or codesandbox url)
+const dbUrl = "http://localhost:3001"; // Local backend (or codesandbox url)
 
 // API calls with uniform
 const weather = weatherApi(
@@ -96,6 +96,11 @@ function App() {
       .catch((err) => {
         throw err; // Throws error for modal to catch
       });
+  };
+
+  const onSwitch = () => {
+    setModalLoginState(!modalLoginState);
+    setModalRegisterState(!modalRegisterState);
   };
 
   // Retain login state on refresh
@@ -212,11 +217,13 @@ function App() {
         isOpen={modalRegisterState}
         onClose={() => setModalRegisterState(false)}
         onRegister={onRegister}
+        onSwitch={onSwitch}
       />
       <LoginModal
         isOpen={modalLoginState}
         onClose={() => setModalLoginState(false)}
         onLogin={onLogin}
+        onSwitch={onSwitch}
       />
       <LogoutModal
         isOpen={modalLogoutState}
