@@ -1,18 +1,26 @@
 import "./Sidebar.css";
 import { useAuth } from "../../../contexts/AuthContext";
+import { useState } from "react";
+import { fallbackStyle } from "../../../utils/constants";
 
 export default function SideBar({ updateProfile, logOutModal }) {
   const { currentUser } = useAuth();
+  const [imgError, setImgError] = useState(false);
 
   return (
     <div className="sidebar">
       <div className="sidebar__header">
         <div className="header__profile-avatar-container">
-          <img
-            src={currentUser.avatar}
-            alt="profile picture"
-            className="header__profile-avatar"
-          />
+          {imgError ? (
+            <div style={fallbackStyle}>{currentUser.name[0].toUpperCase()}</div>
+          ) : (
+            <img
+              src={currentUser.avatar}
+              alt="profile picture"
+              className="header__profile-avatar"
+              onError={() => setImgError(true)}
+            />
+          )}
         </div>
         <h1 className="sidebar__name">{currentUser.name}</h1>
       </div>

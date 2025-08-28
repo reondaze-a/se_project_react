@@ -229,6 +229,20 @@ const isFormComplete = (form) => {
   return Object.values(form).every((val) => val.trim() !== "");
 };
 
+const fallbackStyle = {
+  width: "50px",
+  height: "50px",
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  font: "Cabinet grotesk",
+  fontWeight: "bold",
+  fontSize: "20px",
+  color: "#fff",
+  backgroundColor: "#0098ffb8",
+  transform: "translateY(2%)",
+};
+
 export {
   apiKey,
   defaultClothingItems,
@@ -238,4 +252,5 @@ export {
   _checkResponse,
   catchError,
   isFormComplete,
+  fallbackStyle,
 };
