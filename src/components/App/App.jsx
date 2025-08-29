@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { locations, dbUrl, weatherURL } from "../../utils/constants";
-import { useAuth } from "../../contexts/AuthContext";
-import auth from "../../api/auth";
+import { useAuth } from "../../contexts/CurrentuserContext";
+import auth from "../../utils/api/auth";
 
 import "./App.css";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
@@ -11,8 +11,8 @@ import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import Profile from "../Profile/Profile";
-import weatherApi from "../../api/weatherApi";
-import clothingApi from "../../api/clothingApi";
+import weatherApi from "../../utils/api/weatherApi";
+import clothingApi from "../../utils/api/clothingApi";
 
 // Modal imports
 import ItemModal from "../ModalWithForm/ItemModal/ItemModal";
@@ -45,7 +45,6 @@ function App() {
   const [clothingItems, setClothingItems] = useState([]);
   const [modalItem, setModalItem] = useState(null);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
-
 
   // Fetch weather data on component mount
   useEffect(() => {

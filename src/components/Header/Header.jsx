@@ -2,7 +2,7 @@ import headerLogo from "../../assets/Logo.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { NavLink } from "react-router-dom";
 import "./Header.css";
-import { useAuth } from "../../contexts/AuthContext";
+import { useAuth } from "../../contexts/CurrentuserContext";
 import { useState, useEffect } from "react";
 import { fallbackStyle } from "../../utils/constants";
 
@@ -30,7 +30,9 @@ export default function Header({
         <NavLink to={"/"}>
           <img src={headerLogo} alt="wtwr logo" />
         </NavLink>
-        <p className="header__date">{currentDate}, {locationName}</p>
+        <p className="header__date">
+          {currentDate}, {locationName}
+        </p>
       </div>
 
       <div className="header__right-side">

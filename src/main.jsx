@@ -1,12 +1,12 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './components/App/App'
-import './vendor/normalize.css'
-import './index.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./components/App/App";
+import "./vendor/normalize.css";
+import "./index.css";
 import { HashRouter } from "react-router-dom";
-import { AuthProvider } from './contexts/AuthContext';
+import { AuthProvider } from "./contexts/CurrentuserContext";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <HashRouter>
       <AuthProvider>
@@ -14,4 +14,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       </AuthProvider>
     </HashRouter>
   </React.StrictMode>
-)
+);

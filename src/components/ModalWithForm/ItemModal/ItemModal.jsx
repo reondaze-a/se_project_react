@@ -1,6 +1,6 @@
 import "./ItemModal.css";
 import closeIcon from "../../../assets/close-icon.svg";
-import { useAuth } from "../../../contexts/AuthContext";
+import { useAuth } from "../../../contexts/CurrentuserContext";
 
 export default function ItemModal({
   isOpen,

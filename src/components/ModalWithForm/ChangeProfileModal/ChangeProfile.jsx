@@ -1,6 +1,6 @@
 import ModalWithForm from "../ModalWithForm";
 import { useState, useEffect } from "react";
-import { useAuth } from "../../../contexts/AuthContext";
+import { useAuth } from "../../../contexts/CurrentuserContext";
 import { isFormComplete } from "../../../utils/checkers";
 
 export default function ChangeProfileModal({

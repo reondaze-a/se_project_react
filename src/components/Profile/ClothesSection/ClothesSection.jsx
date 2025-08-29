@@ -1,12 +1,12 @@
 import "./ClothesSection.css";
 import ItemCard from "../../Main/ItemCard/ItemCard";
-import { useAuth } from "../../../contexts/AuthContext";
+import { useAuth } from "../../../contexts/CurrentuserContext";
 
 export default function ClothesSection({
   clothingItems,
   handleCardClick,
   openModal,
-  toggleLike
+  toggleLike,
 }) {
   const { currentUser, loading } = useAuth();
 
