@@ -4,7 +4,7 @@ import { useState, useContext } from 'react';
 
 
 
-export default function ToggleSwitch({ isChecked, onChange }) {
+export default function ToggleSwitch() {
   const [checked, setChecked] = useState(false);
   const tempData = useContext(CurrentTemperatureUnitContext);
 

@@ -1,5 +1,5 @@
 import closeIcon from "../../../assets/close-icon.svg";
-import { useAuth } from "../../../contexts/CurrentuserContext";
+import { useAuth } from "../../../contexts/CurrentUserContext";
 
 export default function LogoutModal({ isOpen, closeModal }) {
   const { setCurrentUser, setIsLoggedIn } = useAuth();

@@ -2,7 +2,7 @@ import headerLogo from "../../assets/Logo.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { NavLink } from "react-router-dom";
 import "./Header.css";
-import { useAuth } from "../../contexts/CurrentuserContext";
+import { useAuth } from "../../contexts/CurrentUserContext";
 import { useState, useEffect } from "react";
 import { fallbackStyle } from "../../utils/constants";
 

@@ -1,6 +1,6 @@
 import "./ClothesSection.css";
 import ItemCard from "../../Main/ItemCard/ItemCard";
-import { useAuth } from "../../../contexts/CurrentuserContext";
+import { useAuth } from "../../../contexts/CurrentUserContext";
 
 export default function ClothesSection({
   clothingItems,

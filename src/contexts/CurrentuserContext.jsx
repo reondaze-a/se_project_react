@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 
-const AuthContext = createContext();
+const CurrentUserContext = createContext();
 
 export function AuthProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -16,5 +16,5 @@ export function AuthProvider({ children }) {
 
 // Custom hook
 export function useAuth() {
-  return useContext(AuthContext);
+  return useContext(CurrentUserContext);
 }

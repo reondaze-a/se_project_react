@@ -10,7 +10,7 @@ export default function Main({ weatherData, handleCardClick, clothingItems, togg
 
     const tempData = useContext(CurrentTemperatureUnitContext);
     const defaultTemp = weatherData ? Math.round(weatherData.main.temp) : null;
-    const weatherCondition = () => {
+    const getWeatherCondition = () => {
         if (defaultTemp >= 76) {
           return 'hot';
         } else if (defaultTemp >= 60) {
@@ -24,7 +24,7 @@ export default function Main({ weatherData, handleCardClick, clothingItems, togg
     
     const currentTemp = tempData.currentTemperatureUnit === 'F' ? `${defaultTemp}°F` : `${temperatureCelsius}°C`;
 
-    const filteredClothingItems = clothingItems.filter((item) => item.weather === weatherCondition());
+    const filteredClothingItems = clothingItems.filter((item) => item.weather === getWeatherCondition());
     
     return (
         <main className="main">

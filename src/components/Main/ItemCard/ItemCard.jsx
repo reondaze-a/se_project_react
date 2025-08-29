@@ -1,4 +1,4 @@
-import { useAuth } from "../../../contexts/CurrentuserContext";
+import { useAuth } from "../../../contexts/CurrentUserContext";
 import { useState } from "react";
 
 export default function ItemCard({
@@ -13,7 +13,6 @@ export default function ItemCard({
   const [isLiked, setIsliked] = useState(likes.includes(currentUser?._id));
 
   const handleLike = () => {
-    if (!currentUser) return; // disables fetch call on non-loggedin users
     setIsliked(!isLiked);
     toggleLike(id, isLiked).catch(() => setIsliked(isLiked)); // Reverts back if fetch fails
   };
@@ -51,11 +50,18 @@ export default function ItemCard({
       <div
         className="item-card__header-container"
         onClick={(e) => e.stopPropagation()}
+        style={
+          currentUser
+            ? { transform: "translateX(-40%)" }
+            : { transform: "translateX(-50%)" }
+        } // Center if no user
       >
         <h2 className="item-card__header">{name}</h2>
-        <button className="item-card__like-button" onClick={handleLike}>
-          {isLiked ? heartFilled : heartOutline}
-        </button>
+        {currentUser && (
+          <button className="item-card__like-button" onClick={handleLike}>
+            {isLiked ? heartFilled : heartOutline}
+          </button>
+        )}
       </div>
 
       <img src={link} alt={name} className="item-card__image" />

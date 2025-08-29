@@ -1,5 +1,5 @@
-import "./Sidebar.css";
-import { useAuth } from "../../../contexts/CurrentuserContext";
+import "./SideBar.css";
+import { useAuth } from "../../../contexts/CurrentUserContext";
 import { useState, useEffect } from "react";
 import { fallbackStyle } from "../../../utils/constants";
 
