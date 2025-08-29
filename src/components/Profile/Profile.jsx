@@ -1,5 +1,5 @@
 import "./Profile.css";
-import SideBar from "./SideBar/SideBar";
+import SideBar from "./SideBar/Sidebar";
 import ClothesSection from "./ClothesSection/ClothesSection";
 
 export default function Profile({
