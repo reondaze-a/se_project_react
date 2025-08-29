@@ -1,7 +1,6 @@
 import "./ModalWithForm.css";
 import closeIcon from "../../assets/close-icon.svg";
-import { Children, useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+
 
 export default function ModalWithForm({
   children,

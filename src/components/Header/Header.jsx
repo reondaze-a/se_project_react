@@ -15,6 +15,7 @@ export default function Header({
   openAddItemModal,
   openRegisterModal,
   openLoginModal,
+  locationName,
 }) {
   const [imgError, setImgError] = useState(false);
   const { isLoggedIn, currentUser } = useAuth();
@@ -29,7 +30,7 @@ export default function Header({
         <NavLink to={"/"}>
           <img src={headerLogo} alt="wtwr logo" />
         </NavLink>
-        <p className="header__date">{currentDate}, Columbus</p>
+        <p className="header__date">{currentDate}, {locationName}</p>
       </div>
 
       <div className="header__right-side">

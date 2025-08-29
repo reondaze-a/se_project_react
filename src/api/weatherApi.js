@@ -1,4 +1,4 @@
-import { _checkResponse } from "./constants";
+import { _checkResponse } from "../utils/checkers";
 
 export default function weatherApi(url) {
     function fetchWeatherData() {

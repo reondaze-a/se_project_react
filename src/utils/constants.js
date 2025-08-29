@@ -207,27 +207,6 @@ const temperatureSwitch = {
   moved: new URL("/temperature-switch/State=Move.png", import.meta.url).href,
 };
 
-const _checkResponse = (res) => {
-  if (res.ok) {
-    return res.json();
-  }
-  return res.json().then((data) => {
-    return Promise.reject(
-      new Error(data.message || "Something went wrong, please try again later.")
-    );
-  });
-};
-
-const catchError = (err) => {
-  if (err.message === "Failed to fetch") {
-    throw new Error("Network error, please try again later.");
-  }
-  throw err;
-};
-
-const isFormComplete = (form) => {
-  return Object.values(form).every((val) => val.trim() !== "");
-};
 
 const fallbackStyle = {
   width: "50px",
@@ -243,14 +222,19 @@ const fallbackStyle = {
   transform: "translateY(2%)",
 };
 
+const dbUrl = "http://localhost:3001"; // Local backend (or codesandbox/stackblitz url)
+
+const weatherURL = (lat, long) => {
+  return `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=${apiKey}`;
+}
+
 export {
   apiKey,
   defaultClothingItems,
   locations,
   weatherBackgrounds,
   temperatureSwitch,
-  _checkResponse,
-  catchError,
-  isFormComplete,
   fallbackStyle,
+  dbUrl,
+  weatherURL
 };

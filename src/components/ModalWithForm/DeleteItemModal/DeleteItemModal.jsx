@@ -1,6 +1,5 @@
 import './DeleteItemModal.css';
-import '../ModalWithForm/ModalWithForm.css';
-import closeIcon from '../../assets/close-icon.svg';
+import closeIcon from "../../../assets/close-icon.svg";
 
 export default function DeleteItemModal({ isOpen, closeModal, onDelete, item }) {
     return (

@@ -1,34 +1,33 @@
 import { useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
+import { locations, dbUrl, weatherURL } from "../../utils/constants";
+import { useAuth } from "../../contexts/AuthContext";
+import auth from "../../api/auth";
+
 import "./App.css";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
-import ItemModal from "../ItemModal/ItemModal";
 import Profile from "../Profile/Profile";
-import weatherApi from "../../utils/weatherApi";
-import clothingApi from "../../utils/clothingApi";
-import auth from "../../utils/auth";
-import AddItemModal from "../AddItemModal/AddItemModal";
-import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
-import RegisterModal from "../RegisterModal/RegisterModal";
-import ChangeProfileModal from "../ChangeProfileModal/ChangeProfile";
-import { Routes, Route } from "react-router-dom";
-import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
-import { apiKey, locations } from "../../utils/constants";
-import { useAuth } from "../../contexts/AuthContext";
-import LoginModal from "../LoginModal/LoginModal";
-import LogoutModal from "../LogoutModal/LogoutModal";
+import weatherApi from "../../api/weatherApi";
+import clothingApi from "../../api/clothingApi";
+
+// Modal imports
+import ItemModal from "../ModalWithForm/ItemModal/ItemModal";
+import AddItemModal from "../ModalWithForm/AddItemModal/AddItemModal";
+import DeleteItemModal from "../ModalWithForm/DeleteItemModal/DeleteItemModal";
+import RegisterModal from "../ModalWithForm/RegisterModal/RegisterModal";
+import ChangeProfileModal from "../ModalWithForm/ChangeProfileModal/ChangeProfile";
+import LoginModal from "../ModalWithForm/LoginModal/LoginModal";
+import LogoutModal from "../ModalWithForm/LogoutModal/LogoutModal";
 
 const lat = locations.Columbus.latitude;
 const long = locations.Columbus.longitude;
 
-const dbUrl = "https://pq9yfz-3001.csb.app"; // Local backend (or codesandbox url)
-
-// API calls with uniform
-const weather = weatherApi(
-  `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=${apiKey}`
-);
+// API calls const
+const weather = weatherApi(weatherURL(lat, long));
 const clothes = clothingApi(dbUrl);
 const userData = auth(dbUrl);
 
@@ -47,10 +46,13 @@ function App() {
   const [modalItem, setModalItem] = useState(null);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
+
+  // Fetch weather data on component mount
   useEffect(() => {
     weather.fetchWeatherData().then(setWeatherData).catch(console.error);
   }, []);
 
+  // Fetch clothing items on component mount
   useEffect(() => {
     clothes
       .fetchClothingItems()
@@ -60,6 +62,7 @@ function App() {
       .catch(console.error);
   }, []);
 
+  // Toggle switch handler
   const handleToggleSwitchChange = () => {
     currentTemperatureUnit === "F"
       ? setCurrentTemperatureUnit("C")
@@ -104,21 +107,25 @@ function App() {
     setModalRegisterState(!modalRegisterState);
   };
 
-  //toggling like function
+  // Toggling like function
   const toggleLike = (id, isLiked) => {
     const apiCall = isLiked ? clothes.dislike : clothes.like;
 
     return apiCall(id)
       .then(({ data: updatedItem }) => {
-        setClothingItems((currentItems) => currentItems.map((currentItem) => currentItem._id === updatedItem._id ? updatedItem : currentItem))
-        return updatedItem;  // passes updated item to chain the promise
+        setClothingItems((currentItems) =>
+          currentItems.map((currentItem) =>
+            currentItem._id === updatedItem._id ? updatedItem : currentItem
+          )
+        );
+        return updatedItem; // passes updated item to chain the promise
       })
       .catch((err) => {
         throw err;
       }); // throws error for the chain to catch
-  }
+  };
 
-  // Retain login state on refresh
+  // check token validity and retain login state on page refresh
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
 
@@ -146,6 +153,7 @@ function App() {
         openAddItemModal={() => setModalAddItemState(true)}
         openRegisterModal={() => setModalRegisterState(true)}
         openLoginModal={() => setModalLoginState(true)}
+        locationName={weatherData ? weatherData.name : "Loading..."}
       />
 
       <Routes>

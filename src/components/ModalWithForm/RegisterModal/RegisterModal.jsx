@@ -1,10 +1,14 @@
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import ModalWithForm from "../ModalWithForm";
 import { useState } from "react";
 import "./RegisterModal.css";
-import "../ModalWithForm/ModalWithForm.css";
-import { isFormComplete } from "../../utils/constants";
+import { isFormComplete } from "../../../utils/checkers";
 
-export default function RegisterModal({ isOpen, onClose, onRegister, onSwitch }) {
+export default function RegisterModal({
+  isOpen,
+  onClose,
+  onRegister,
+  onSwitch,
+}) {
   const [form, setForm] = useState({
     email: "",
     password: "",

@@ -1,7 +1,5 @@
-import "../DeleteItemModal/DeleteItemModal.css";
-import "../ModalWithForm/ModalWithForm.css";
-import closeIcon from "../../assets/close-icon.svg";
-import { useAuth } from "../../contexts/AuthContext";
+import closeIcon from "../../../assets/close-icon.svg";
+import { useAuth } from "../../../contexts/AuthContext";
 
 export default function LogoutModal({ isOpen, closeModal }) {
   const { setCurrentUser, setIsLoggedIn } = useAuth();

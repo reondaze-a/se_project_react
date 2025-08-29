@@ -1,10 +1,9 @@
 import WeatherCard from './WeatherCard/WeatherCard';
 import ItemCard from './ItemCard/ItemCard';
-import { defaultClothingItems } from '../../utils/constants';
 import './Main.css';
 import './ItemCard/ItemCard.css';
 import { CurrentTemperatureUnitContext } from '../../contexts/CurrentTemperatureUnitContext';
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 
 
 export default function Main({ weatherData, handleCardClick, clothingItems, toggleLike }) {

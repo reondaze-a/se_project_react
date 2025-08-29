@@ -1,7 +1,6 @@
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import ModalWithForm from "../ModalWithForm";
 import { useState } from "react";
-import "../ModalWithForm/ModalWithForm.css";
-import { isFormComplete } from "../../utils/constants";
+import { isFormComplete } from "../../../utils/checkers";
 
 export default function LoginModal({ isOpen, onClose, onLogin, onSwitch }) {
   const [form, setForm] = useState({

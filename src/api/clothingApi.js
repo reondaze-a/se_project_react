@@ -1,8 +1,8 @@
-import { _checkResponse, catchError } from "./constants";
+import { _checkResponse, catchError } from "../utils/checkers";
 
 export default function clothingApi(url) {
   function fetchClothingItems() {
-    return fetch(`${url}/items`).then(_checkResponse);
+    return fetch(`${url}/items`).then(_checkResponse).catch(catchError);
   }
 
   function addClothingItem(item) {
@@ -13,7 +13,7 @@ export default function clothingApi(url) {
         Authorization: `Bearer ${localStorage.getItem("jwt")}`,
       },
       body: JSON.stringify(item),
-    }).then(_checkResponse);
+    }).then(_checkResponse).catch(catchError);
   }
 
   function deleteClothingItem(id) {
@@ -24,7 +24,7 @@ export default function clothingApi(url) {
         Authorization: `Bearer ${localStorage.getItem("jwt")}`,
       },
       body: JSON.stringify({ _id: id }),
-    }).then(_checkResponse);
+    }).then(_checkResponse).catch(catchError);
   }
 
   function like(id) {
@@ -33,7 +33,7 @@ export default function clothingApi(url) {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("jwt")}`,
       },
-    }).then(_checkResponse);
+    }).then(_checkResponse).catch(catchError);
   }
 
   function dislike(id) {
@@ -42,7 +42,7 @@ export default function clothingApi(url) {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("jwt")}`,
       },
-    }).then(_checkResponse);
+    }).then(_checkResponse).catch(catchError);
   }
 
   return {

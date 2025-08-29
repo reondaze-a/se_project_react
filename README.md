@@ -41,5 +41,7 @@ By combining weather data and user-interaction features, WTWR serves as both a p
 
 Click here to open the website: [WTWR](https://reondaze-a.github.io/se_project_react/#/)
 
+Link to the Back-end repository: [Express Backend](https://github.com/reondaze-a/se_project_express)
+
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh

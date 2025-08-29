@@ -1,4 +1,4 @@
-import { _checkResponse, catchError } from "./constants";
+import { _checkResponse, catchError } from "../utils/checkers";
 
 export default function auth(url) {
   function registerUser({ name, avatar, email, password }) {

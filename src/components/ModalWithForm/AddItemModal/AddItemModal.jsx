@@ -1,6 +1,6 @@
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import ModalWithForm from "../ModalWithForm";
 import { useState, useEffect } from "react";
-import { isFormComplete } from "../../utils/constants";
+import { isFormComplete } from "../../../utils/checkers";
 
 export default function AddItemModal({ isOpen, onClose, onAddItem }) {
   const [form, setForm] = useState({
