@@ -8,9 +8,9 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, loading, setLoading }}>
+    <CurrentUserContext.Provider value={{ isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, loading, setLoading }}>
       {children}
-    </AuthContext.Provider>
+    </CurrentUserContext.Provider>
   );
 }
 
