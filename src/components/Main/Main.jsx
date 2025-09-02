@@ -7,6 +7,7 @@ import { useContext } from 'react';
 
 
 export default function Main({ weatherData, handleCardClick, clothingItems, toggleLike }) {
+    
 
     const tempData = useContext(CurrentTemperatureUnitContext);
     const defaultTemp = weatherData ? Math.round(weatherData.main.temp) : null;

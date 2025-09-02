@@ -10,10 +10,9 @@ export default function ItemCard({
   likes,
 }) {
   const { currentUser } = useAuth();
-  const [isLiked, setIsliked] = useState(likes.includes(currentUser?._id));
+  const isLiked = currentUser ? likes.includes(currentUser?._id) : false; // direct deriviation
 
   const handleLike = () => {
-    setIsliked(!isLiked);
     toggleLike(id, isLiked).catch(() => setIsliked(isLiked)); // Reverts back if fetch fails
   };
 
