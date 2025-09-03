@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { locations, dbUrl, weatherURL } from "../../utils/constants";
 import { useAuth } from "../../contexts/CurrentUserContext"
@@ -188,6 +188,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="*" element={<div>404 not found</div>} />
       </Routes>
 
       <Footer />
