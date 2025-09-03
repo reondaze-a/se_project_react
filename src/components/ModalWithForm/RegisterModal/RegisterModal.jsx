@@ -1,7 +1,7 @@
 import ModalWithForm from "../ModalWithForm";
 import { useState } from "react";
 import "./RegisterModal.css";
-import { isFormComplete } from "../../../utils/checkers";
+import { useFormAndValidation } from "../../../hooks/useFormAndValidation";
 
 export default function RegisterModal({
   isOpen,
@@ -9,56 +9,27 @@ export default function RegisterModal({
   onRegister,
   onSwitch,
 }) {
-  const [form, setForm] = useState({
-    email: "",
-    password: "",
-    name: "",
-    avatar: "",
-  });
+  const { values, handleChange, resetForm, errors, isValid } = useFormAndValidation();
 
-  // Clear form state
-  const initialState = {
-    email: "",
-    password: "",
-    name: "",
-    avatar: "",
-  };
-
-  const [error, setError] = useState("");
+  const [serverError, setServerError] = useState("");
 
   // Timeout for error message
   const showError = (message, duration = 5000) => {
-    setError(message);
+    setServerError(message);
     if (duration > 0) {
-      setTimeout(() => setError(""), duration);
+      setTimeout(() => setServerError(""), duration);
     }
   };
 
-  // Handles input changes
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  // check for input
-  const checkForm = isFormComplete(form);
 
   const handleSubmit = () => {
-    const { name, email, avatar, password } = form;
+    const { name, email, avatar, password } = values;
 
-    setError("");
-    onRegister({
-      name,
-      email,
-      avatar,
-      password,
-    })
+    setServerError("");
+    onRegister({ name, email, avatar, password })
       .then(() => {
         onClose();
-        setForm(initialState);
+        resetForm(); // clear all values + errors
       })
       .catch((err) => {
         showError(err.message);
@@ -80,10 +51,10 @@ export default function RegisterModal({
           className="modal__input"
           placeholder="Email"
           required
-          value={form.email}
+          value={values.email || ""}
           onChange={handleChange}
         />
-        <span className="modal__error-text"></span>
+        <span className="modal__error-text">{errors.email}</span>
       </label>
       <label className="modal__label">
         <span className="modal__label_title">Password*</span>
@@ -93,10 +64,10 @@ export default function RegisterModal({
           className="modal__input"
           placeholder="Password"
           required
-          value={form.password}
+          value={values.password || ""}
           onChange={handleChange}
         />
-        <span className="modal__error-text"></span>
+        <span className="modal__error-text">{errors.password}</span>
       </label>
       <label className="modal__label">
         <span className="modal__label_title">Name*</span>
@@ -106,10 +77,10 @@ export default function RegisterModal({
           className="modal__input"
           placeholder="Name"
           required
-          value={form.name}
+          value={values.name || ""}
           onChange={handleChange}
         />
-        <span className="modal__error-text"></span>
+        <span className="modal__error-text">{errors.name}</span>
       </label>
       <label className="modal__label">
         <span className="modal__label_title">Avatar*</span>
@@ -121,16 +92,16 @@ export default function RegisterModal({
           minLength="2"
           maxLength="120"
           required
-          value={form.avatar}
+          value={values.avatar || ""}
           onChange={handleChange}
         />
-        <span className="modal__error-text"></span>
+        <span className="modal__error-text">{errors.avatar}</span>
       </label>
 
       {/*Error message in case registering fails*/}
-      {error && (
+      {serverError && (
         <span className="modal__error-text modal__error-text_active">
-          {error}
+          {serverError}
         </span>
       )}
 
@@ -138,7 +109,7 @@ export default function RegisterModal({
         <button
           type="submit"
           className={`modal__submit-button ${
-            checkForm ? "" : "modal__submit-button_disabled"
+            isValid ? "" : "modal__submit-button_disabled"
           }`}
           // disabled
         >

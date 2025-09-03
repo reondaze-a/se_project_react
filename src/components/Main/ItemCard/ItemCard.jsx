@@ -12,8 +12,9 @@ export default function ItemCard({
   const { currentUser } = useAuth();
   const isLiked = currentUser ? likes.includes(currentUser?._id) : false; // direct deriviation
 
+
   const handleLike = () => {
-    toggleLike(id, isLiked).catch(() => setIsliked(isLiked)); // Reverts back if fetch fails
+    toggleLike(id, isLiked).catch(console.error); // Reverts back if fetch fails
   };
 
   const heartOutline = (

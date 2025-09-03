@@ -1,6 +1,6 @@
 const apiKey = "2bac2b36ac8b9909f37bd9018804f657";
 
-const dbUrl = "https://pq9yfz-3001.csb.app"; // hosted/localhost backend
+const dbUrl = "http://localhost:3001"; // hosted/localhost backend
 
 const defaultClothingItems = [
   {
