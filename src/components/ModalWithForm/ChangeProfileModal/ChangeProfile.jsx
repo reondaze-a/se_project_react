@@ -79,7 +79,7 @@ export default function ChangeProfileModal({
       handleSubmit={handleSubmit}
       title="Change profile data"
     >
-      <label htmlFor="name" className="modal__label">
+      <label className="modal__label">
         <span className="modal__label_title">Name*</span>
         <input
           type="text"
@@ -92,7 +92,7 @@ export default function ChangeProfileModal({
         />
         <span className="modal__error-text"></span>
       </label>
-      <label htmlFor="avatar" className="modal__label">
+      <label className="modal__label">
         <span className="modal__label_title">Avatar</span>
         <input
           type="url"

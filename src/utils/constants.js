@@ -1,5 +1,7 @@
 const apiKey = "2bac2b36ac8b9909f37bd9018804f657";
 
+const dbUrl = "https://pq9yfz-3001.csb.app"; // hosted/localhost backend
+
 const defaultClothingItems = [
   {
     _id: 0,
@@ -207,7 +209,6 @@ const temperatureSwitch = {
   moved: new URL("/temperature-switch/State=Move.png", import.meta.url).href,
 };
 
-
 const fallbackStyle = {
   width: "50px",
   height: "50px",
@@ -222,11 +223,11 @@ const fallbackStyle = {
   transform: "translateY(2%)",
 };
 
-const dbUrl = "http://localhost:3001"; // Local backend (or codesandbox/stackblitz url)
+// Local backend (or codesandbox/stackblitz url)
 
 const weatherURL = (lat, long) => {
   return `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=${apiKey}`;
-}
+};
 
 export {
   apiKey,
@@ -236,5 +237,5 @@ export {
   temperatureSwitch,
   fallbackStyle,
   dbUrl,
-  weatherURL
+  weatherURL,
 };

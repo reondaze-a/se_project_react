@@ -45,7 +45,7 @@ export default function AddItemModal({ isOpen, onClose, onAddItem }) {
       }}
       title="New garment"
     >
-      <label htmlFor="itemName" className="modal__label">
+      <label className="modal__label">
         <span className="modal__label_title">Name</span>
         <input
           name="itemName"
@@ -58,7 +58,7 @@ export default function AddItemModal({ isOpen, onClose, onAddItem }) {
         />
         <span className="modal__error-text post-link-error"></span>
       </label>
-      <label htmlFor="itemLink" className="modal__label">
+      <label className="modal__label">
         <span className="modal__label_title">Image</span>
         <input
           name="itemLink"

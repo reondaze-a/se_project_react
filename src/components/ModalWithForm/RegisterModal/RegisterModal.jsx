@@ -72,7 +72,7 @@ export default function RegisterModal({
       handleSubmit={handleSubmit}
       title="Sign up"
     >
-      <label htmlFor="email" className="modal__label">
+      <label className="modal__label">
         <span className="modal__label_title">Email*</span>
         <input
           type="email"
@@ -85,7 +85,7 @@ export default function RegisterModal({
         />
         <span className="modal__error-text"></span>
       </label>
-      <label htmlFor="password" className="modal__label">
+      <label className="modal__label">
         <span className="modal__label_title">Password*</span>
         <input
           name="password"
@@ -98,7 +98,7 @@ export default function RegisterModal({
         />
         <span className="modal__error-text"></span>
       </label>
-      <label htmlFor="name" className="modal__label">
+      <label className="modal__label">
         <span className="modal__label_title">Name*</span>
         <input
           name="name"
@@ -111,7 +111,7 @@ export default function RegisterModal({
         />
         <span className="modal__error-text"></span>
       </label>
-      <label htmlFor="avatar" className="modal__label">
+      <label className="modal__label">
         <span className="modal__label_title">Avatar*</span>
         <input
           name="avatar"

@@ -61,7 +61,7 @@ export default function LoginModal({ isOpen, onClose, onLogin, onSwitch }) {
       handleSubmit={handleSubmit}
       title="Login"
     >
-      <label htmlFor="email" className="modal__label">
+      <label className="modal__label">
         <span className="modal__label_title">Email</span>
         <input
           name="email"
@@ -74,7 +74,7 @@ export default function LoginModal({ isOpen, onClose, onLogin, onSwitch }) {
         />
         <span className="modal__error-text"></span>
       </label>
-      <label htmlFor="password" className="modal__label">
+      <label className="modal__label">
         <span className="modal__label_title">Password</span>
         <input
           name="password"
