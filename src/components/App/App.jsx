@@ -76,6 +76,8 @@ function App() {
         console.log("Register successful!");
         setIsLoggedIn(true);
         setCurrentUser(data);
+
+        return onLogin({ email: user.email, password: user.password }); // auto-login
       })
       .catch((err) => {
         throw err; // Throws error for modal to catch
