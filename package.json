@@ -9,7 +9,7 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "npm run build && scp -r ./dist/* revisraymart@@whattowear.strangled.net:/home/revisraymart/frontend"
+    "deploy": "npm run build && scp -r ./dist/* revisraymart@whattowear.strangled.net:/home/revisraymart/frontend"
   },
   "dependencies": {
     "express": "^4.21.2",
