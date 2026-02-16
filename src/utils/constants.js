@@ -1,6 +1,6 @@
 const apiKey = "2bac2b36ac8b9909f37bd9018804f657";
 
-const dbUrl = import.meta.env.VITE_DB_URL || "http://localhost:3000";
+const dbUrl = import.meta.env.VITE_DB_URL || "http://localhost:3001";
 
 const defaultClothingItems = [
   {
