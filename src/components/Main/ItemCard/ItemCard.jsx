@@ -1,5 +1,4 @@
 import { useAuth } from "../../../contexts/CurrentUserContext";
-import { useState } from "react";
 
 export default function ItemCard({
   name,

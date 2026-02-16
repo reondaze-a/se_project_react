@@ -16,7 +16,6 @@ if (hour < 18 && hour >= 6) {
 
 
 export default function WeatherCard({ weatherData, currentTemp }) {
-    const tempData = useContext(CurrentTemperatureUnitContext);
     
     const currentWeather = weatherData ? weatherData.weather[0].main : null;
     const currentWeatherBackground = weatherBackgrounds[partOfDay][currentWeather];

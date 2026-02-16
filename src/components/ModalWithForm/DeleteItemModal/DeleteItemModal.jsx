@@ -1,7 +1,7 @@
 import './DeleteItemModal.css';
 import closeIcon from "../../../assets/close-icon.svg";
 
-export default function DeleteItemModal({ isOpen, closeModal, onDelete, item }) {
+export default function DeleteItemModal({ isOpen, closeModal, onDelete }) {
     return (
         <div className={`modal ${isOpen ? 'modal_open' : ''}`} onClick={closeModal}>
             <div className="delete-item-modal__container" onClick={(e) => e.stopPropagation()}>
