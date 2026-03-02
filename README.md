@@ -39,6 +39,6 @@ By combining weather data and user-interaction features, WTWR serves as both a p
 
 ## Links
 
-Click here to open the website: [WTWR](https://whattowear.strangled.net/)
+Click here to open the website: [WTWR](https://reondaze-a.github.io/se_project_react/#/)
 
 Link to the Back-end repository: [Express Backend](https://github.com/reondaze-a/se_project_express)
